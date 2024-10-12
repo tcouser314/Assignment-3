@@ -4,14 +4,14 @@
  *
  *	@author <<Your names and Student IDs>>
  *	@version September 2024
- *	
+ *
  *	This file holds the GameTree ADT which is a
  *	general game tree.  The GameTree is built using
  *	TNode ADTs.  A GameTree object consists of a
  *	"root" field which refers to a TNode object
  *	which has a "data" field and "child" and
  *	"sibling" references, and a "level" value.
- *	
+ *
  *	YOU NEED TO MAKE CHANGES TO THIS FILE!
 */
 
@@ -19,11 +19,11 @@
 public class GameTree implements GameTreeInterface
 {
 	// finals
-	protected final boolean TRACING=true;				// do we want to see trace output?
+	protected final boolean TRACING=false;				// do we want to see trace output?
 
 	// non-static property (i.e. all objects have their own value)
 	protected TNode root;								// the node at the top of the tree
-	// static properties (i.e. all objects share these values)	
+	// static properties (i.e. all objects share these values)
 	protected static boolean moveRandomly;				// choose the first/random best move
 	protected static boolean symmetryAllowed;			// include symmetrical moves or not
 
@@ -38,7 +38,7 @@ public class GameTree implements GameTreeInterface
 	public GameTree()
 	{
 		trace("GameTree: constructor starts");
-		
+
 //COMPLETE ME
 
 		trace("GameTree: constructor ends");
@@ -64,13 +64,13 @@ public class GameTree implements GameTreeInterface
 	public GameTree(Object o, int l)
 	{
 		trace("GameTree: constructor starts");
-		
+
 		root=new TNode(o,l);
-		
+
 		trace("GameTree: constructor ends");
 	}
-	
-	
+
+
 	public boolean isEmpty()
 	/**
 	 *	isEmpty
@@ -84,7 +84,7 @@ public class GameTree implements GameTreeInterface
 	*/
 	{
 		trace("isEmpty: isEmpty starts and ends");
-		
+
 		return (root == null);
 	}
 
@@ -103,7 +103,7 @@ public class GameTree implements GameTreeInterface
 	public Object getData() throws EmptyGameTreeException
 	{
 		trace("getData: getData starts");
-		
+
 		if (isEmpty())
 		{
 			trace("getData: empty game tree");
@@ -114,8 +114,8 @@ public class GameTree implements GameTreeInterface
 //COMPLETE ME
 		return null;	//CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	getRandomness
 	 *	Get method for "moveRandomly" instance variable's value.
@@ -132,8 +132,8 @@ public class GameTree implements GameTreeInterface
 //COMPLETE ME
 		return false;	//CHANGE ME
 }
-	
-	
+
+
 	/**
 	 *	getSymmetries
 	 *	Get method for "symmetryAllowed" instance variable's value.
@@ -150,8 +150,8 @@ public class GameTree implements GameTreeInterface
 //COMPLETE ME
 		return false;	//CHANGE ME
 }
-	
-	
+
+
 	/**
 	 *	getLevel
 	 *	Get method for "root" instance variable's level value.
@@ -166,18 +166,18 @@ public class GameTree implements GameTreeInterface
 	public int getLevel() throws EmptyGameTreeException
 	{
 		trace("getLevel: getLevel starts");
-		
+
 		if (isEmpty())
 		{
 			trace("getLevel: empty game tree");
 			throw new EmptyGameTreeException();
-		}	
-		
+		}
+
 		trace("getLevel: getLevel ends");
 //COMPLETE ME
 		return 0;	//CHANGE ME
-	}	
-	
+	}
+
 
 	/**
 	 *	getChild
@@ -194,15 +194,15 @@ public class GameTree implements GameTreeInterface
 	public GameTree getChild() throws EmptyGameTreeException
 	{
 		GameTree r;
-		
+
 		trace("getChild: getChild starts");
-		
+
 		if (isEmpty())
 		{
 			trace("getChild: empty game tree");
 			throw new EmptyGameTreeException();
 		}
-  
+
 		// need to create a game tree to hold the answer
 		r=new GameTree();
 		r.root=root.getChild();
@@ -227,20 +227,20 @@ public class GameTree implements GameTreeInterface
 	public GameTree getSibling() throws EmptyGameTreeException
 	{
 		GameTree r;
-		
+
 		trace("getSibling: getSibling starts");
-		
+
 		if (isEmpty())
 		{
 			trace("getSibling: empty game tree");
 			throw new EmptyGameTreeException();
   		}
-  		
+
 		// need to create a game tree to hold the answer
 //COMPLETE ME
 
 		trace("getSibling: getSibling ends");
-		return null;	//CHANGE ME	
+		return null;	//CHANGE ME
 	}
 
 
@@ -259,18 +259,18 @@ public class GameTree implements GameTreeInterface
 	public void setData(Object o) throws EmptyGameTreeException
 	{
 		trace("setData: setData starts");
-		
+
 		if (isEmpty())
 		{
 			trace("setData: empty game tree");
 			throw new EmptyGameTreeException();
 		}
-		
-//COMPLETE ME		
+
+//COMPLETE ME
 		trace("setData: setData ends");
 	}
-	
-	
+
+
 	/**
 	 *	setRandomness
 	 *	Set method for "moveRandomly" instance variable.
@@ -285,12 +285,12 @@ public class GameTree implements GameTreeInterface
 	public void setRandomness(boolean r)
 	{
 		trace("setRandomness: setRandomness starts");
-		
-//COMPLETE ME		
+
+//COMPLETE ME
 		trace("setRandomness: setRandomness ends");
 	}
-	
-	
+
+
 	/**
 	 *	setSymmetries
 	 *	Set method for "symmetryAllowed" instance variable.
@@ -305,12 +305,12 @@ public class GameTree implements GameTreeInterface
 	public void setSymmetries(boolean s)
 	{
 		trace("setSymmetries: setSymmetries starts");
-		
-//COMPLETE ME		
+
+//COMPLETE ME
 		trace("setSymmetries: setSymmetries ends");
 	}
-	
-	
+
+
 	/**
 	 *	setLevel
 	 *	Set method for "root" instance variable's level field.
@@ -326,19 +326,19 @@ public class GameTree implements GameTreeInterface
 	public void setLevel(int l) throws EmptyGameTreeException
 	{
 		trace("setLevel: setLevel starts");
-		
+
 		if (isEmpty())
 		{
 			trace("setLevel: empty game tree");
 			throw new EmptyGameTreeException();
   		}
-  		
+
 //COMPLETE ME
 
 		trace("setLevel: setLevel ends");
 	}
-	
-	
+
+
 	/**
 	 *	setChild
 	 *	Set method for "root" instance variable's child field.
@@ -354,19 +354,19 @@ public class GameTree implements GameTreeInterface
 	public void setChild(GameTree t) throws EmptyGameTreeException
 	{
 		trace("setChild: setChild starts");
-		
+
 		if (isEmpty())
 		{
 			trace("setChild: empty game tree");
 			throw new EmptyGameTreeException();
   		}
-  		
+
 		root.setChild(t.root);
-		
+
 		trace("setChild: setChild ends");
 	}
-	
-	
+
+
 	/**
 	 *	setSibling
 	 *	Set method for "root" instance variable's sibling field.
@@ -382,18 +382,18 @@ public class GameTree implements GameTreeInterface
 	public void setSibling(GameTree t) throws EmptyGameTreeException
 	{
 		trace("setSibling: setSibling starts");
-		
+
 		if (isEmpty())
 		{
 			trace("setSibling: empty game tree");
 			throw new EmptyGameTreeException();
 		}
-		  
+
 //COMPLETE ME
 		trace("setSibling: setSibling ends");
 	}
-	
-	
+
+
 	/**
 	 *	generateLevelDF
 	 *	Generate the next level of the tree
@@ -416,17 +416,17 @@ public class GameTree implements GameTreeInterface
 	*/
 	public void generateLevelDF(Stack s,Player curr)
 	{
-	
+
 		assert ((s!=null) && (curr!=null));
 
 		trace("generateLevelDF: generateLevelDF starts");
-		
+
 //COMPLETE ME
-		
+
 		trace("generateLevelDF: generateLevelDF ends");
 	}
-	
-	
+
+
 	/**
 	 *	buildGameDF
 	 *	Generate the game tree in a depth-first manner
@@ -434,7 +434,7 @@ public class GameTree implements GameTreeInterface
 	 *				   is defined, the given player represents the
 	 *				   current player, and the given int value
 	 *				   represents the desired depth of the tree
-	 *	Post-condition: If the given tree is not already deep enough, 
+	 *	Post-condition: If the given tree is not already deep enough,
 	 *				    if there are children, then these are traversed
 	 *					and all siblings are pushed onto the stack.  If
 	 *					(when) there are no children an additional
@@ -455,17 +455,17 @@ public class GameTree implements GameTreeInterface
 	public void buildGameDF(Stack s, Player curr, int d)
 	{
 		GameTree t;
-		
+
 		assert ((!isEmpty()) && (s!=null) && (curr!=null) && (d>0));
-			
+
 		trace("buildGameDF: buildGameDF starts");
-		
+
 //COMPLETE ME
-		
+
 		trace("buildGameDF: buildGameDF ends");
 	}
-	
-	
+
+
 	/**
 	 *	generateLevelBF
 	 *	Generate the next level of the tree
@@ -488,17 +488,17 @@ public class GameTree implements GameTreeInterface
 	*/
 	public void generateLevelBF(Queue q,Player curr)
 	{
-	
+
 		assert ((q!=null) && (curr!=null));
 
 		trace("generateLevelBF: generateLevelBF starts");
-		
+
 //COMPLETE ME
-		
+
 		trace("generateLevelBF: generateLevelBF ends");
 	}
-	
-	
+
+
 	/**
 	 *	buildGameBF
 	 *	Generate the game tree in a breadth-first manner
@@ -506,7 +506,7 @@ public class GameTree implements GameTreeInterface
 	 *				   is defined, the given player represents the
 	 *				   current player, and the given int value
 	 *				   represents the desired depth of the tree
-	 *	Post-condition: If the given tree is not already deep enough, 
+	 *	Post-condition: If the given tree is not already deep enough,
 	 *				    if there are children, then these are traversed
 	 *					and all siblings are added to the queue.  If
 	 *					(when) there are no children an additional
@@ -527,15 +527,15 @@ public class GameTree implements GameTreeInterface
 	public void buildGameBF(Queue q, Player curr, int d)
 	{
 		GameTree t;
-		
+
 		assert ((!isEmpty()) && (q!=null) && (curr!=null) && (d>0));
-			
+
 		trace("buildGameBF: buildGameBF starts");
-		
+
 //COMPLETE ME
-		
+
 		trace("buildGameBF: buildGameBF ends");
-	}				
+	}
 
 
 	/**
@@ -560,13 +560,13 @@ public class GameTree implements GameTreeInterface
 	  	Location l1,l2;
 	  	int d;
 	  	GameTree t;
-  
+
   		assert (g!=null);
-  		
+
 		trace("symmetry: symmetry starts");
-		
+
   		t=getChild();
-  		
+
 	  	if (t.isEmpty())
 	  	{
 			// parent can't be a symmetry of a child if there are no children
@@ -585,11 +585,11 @@ public class GameTree implements GameTreeInterface
 	        		for (c1=1; c1<=d; c1++)
 	        		{
 	        			l1=new Location(r1,c1);
-	        			
+
 	          			r2=r1;
 	          			c2=d-c1+1;
 	          			l2=new Location(r2,c2);
-	          			
+
 	          			if (! ((Grid) t.getData()).getSymbol(l1).equals(g.getSymbol(l2)))
 						{
 	            			vSymm=false;
@@ -620,7 +620,7 @@ public class GameTree implements GameTreeInterface
 						}
 	        		}
 	        	}
-        
+
 	      		if (hSymm||vSymm||lSymm||rSymm)
 				{
 	        		symm=true;
@@ -629,16 +629,16 @@ public class GameTree implements GameTreeInterface
 				{
 	        		symm=false;
 				}
-	        		
+
 	      		t=t.getSibling();
 	    	}
-	
+
 			trace("symmetry: symmetry ends");
-	    	return symm;  
+	    	return symm;
 		}
 	}
-	
-	
+
+
 	/**
 	 *	adjustLevel
 	 *	Adjust the level numbers of the tree
@@ -651,7 +651,7 @@ public class GameTree implements GameTreeInterface
 	protected void adjustLevel()
 	{
 		trace("adjustLevel: adjustLevel starts");
-		
+
 		// traverse the entire tree, reducing the level value of every node by 1
   		if (! isEmpty()) {
     		getChild().adjustLevel();
@@ -659,7 +659,7 @@ public class GameTree implements GameTreeInterface
     		trace("adjustLevel: setting level to " + (getLevel()-1));
     		setLevel(getLevel()-1);
   		}
-  		
+
 		trace("adjustLevel: adjustLevel ends");
 	}
 
@@ -684,15 +684,15 @@ public class GameTree implements GameTreeInterface
   		int d;
   		double a;
   		GameTree t;
-  
+
 		trace("chooseBest: chooseBest starts");
 		trace("chooseBest: next move should have worth of " + ((Grid)getData()).getWorth());
-		
+
   		v=(int)(((Grid)getData()).getWorth());
   		d=((Grid)getData()).getDimension();
   		f=1;
   		trace("chooseBest: starting with a worth of " + v + " and a frequency of " + f);
-  		
+
 		// search all siblings for the best value and determine how many equal-valued alternatives there are
   		t=this;
   		while (! t.getSibling().isEmpty())
@@ -700,15 +700,15 @@ public class GameTree implements GameTreeInterface
     		t=t.getSibling();
     		i=(int)(((Grid)t.getData()).getWorth());
     		trace("chooseBest: considering a worth of " + i);
-    		
+
     		if (i == v)
     		{
 	    		trace("chooseBest: found another, frequency is now " + i);
     			f++;
     		}
-    		
+
    			if (t.getLevel() % 2 != 0)
-   			{ 
+   			{
        			if (i > v)
        			{
 	    			trace("chooseBest: found a better worth of " + v);
@@ -727,7 +727,7 @@ public class GameTree implements GameTreeInterface
       		}
   		}
   		trace("chooseBest: best worth is " + v + " and a frequency of " + f);
-  		
+
 		// combine value and frequency into a single double, and negate it if the value is negative
   		a=(f / (d * d + 1.0));
   		if (v<0)
@@ -736,7 +736,7 @@ public class GameTree implements GameTreeInterface
   		}
 
 		trace("chooseBest: chooseBest ends with " + (v+a));
-  		
+
   		return v+a;
 	}
 
@@ -757,7 +757,7 @@ public class GameTree implements GameTreeInterface
   		Grid b;
 
 		trace("traverse: traverse starts");
-		
+
 		// search the entire game tree for the value of the best move and percolate that up
   		if (! isEmpty())
   		{
@@ -777,7 +777,7 @@ public class GameTree implements GameTreeInterface
       			trace("traverse: worth of " + v + " set");
     		}
   		}
-  		
+
 		trace("traverse: traverse ends");
 	}
 
@@ -812,9 +812,9 @@ public class GameTree implements GameTreeInterface
 		int r;
 		int d;
   		boolean found;
-  
+
   		assert ((! isEmpty()) && (((int)s) != s));
-  		
+
 		trace("findBest: findBest starts");
 
 		// given the combined value and frequency of the move to choose from the game tree
@@ -835,7 +835,7 @@ public class GameTree implements GameTreeInterface
 			// select the first one we find
 			trace("findBest: looking non-randomly for first move with a worth of " + v);
 		}
-		
+
 		// go to the next level and find the move we've chosen
   		t=getChild();
   		c=1;
@@ -864,14 +864,14 @@ public class GameTree implements GameTreeInterface
  	      		t=t.getSibling();
      		}
   		}
-  		
+
 		// this should now be the root of game tree, so delete the redundant parent and prune all siblings
   		trace("findBest: found it; cutting off remaining siblings and adjusting");
         t.setSibling(new GameTree());
     	t.adjustLevel();
-    	
+
     	root=t.root;
-    	
+
 		trace("findBest: findBest ends");
 	}
 
@@ -892,7 +892,7 @@ public class GameTree implements GameTreeInterface
 	  	GameTree t;
 
 		trace("findMove: findMove starts");
-		
+
 		// go down to the child level and find the move in the game tree that matches the user's move
 	  	t=getChild();
 	  	if (! t.isEmpty())
@@ -902,7 +902,7 @@ public class GameTree implements GameTreeInterface
 	      		trace("findMove: not this move, trying sibling");
 	      		t=t.getSibling();
       		}
-      		
+
 	    	if (t.isEmpty())
 	    	{
 				// hmmm something went wrong, that just shouldn't happen
@@ -917,11 +917,11 @@ public class GameTree implements GameTreeInterface
 	      		t.adjustLevel();
 	    	}
 	  	}
-	  	
+
 		root=t.root;
 		trace("findMove: findMove ends");
 	}
-	
+
 
 	/**
 	 *	rootNodeToString
@@ -941,7 +941,7 @@ public class GameTree implements GameTreeInterface
 		String s="";
 
 		trace("rootNodeToString: rootNodeToString starts");
-		
+
 		if (isEmpty())
 		{
 			s="<>";
@@ -954,8 +954,8 @@ public class GameTree implements GameTreeInterface
 		trace("rootNodeToString: rootNodeToString ends");
 		return s;
 	}
-	
-	
+
+
 	public String toString()
 	/**
 	 *	toString
@@ -974,7 +974,7 @@ public class GameTree implements GameTreeInterface
 		String s="";
 
 		trace("toString: toString starts");
-		
+
 		if (isEmpty())
 		{
 			trace("toString: toString ends");

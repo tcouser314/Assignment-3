@@ -4,11 +4,11 @@
  *
  *	@author <<Your names and Student IDs>>
  *	@version September 2024
- *	
+ *
  *	This file holds the Location ADT which represents
  *	indices to (positions within) the two-dimensional grid.
  *	A Location consists of a Row number and a Column number.
- *	
+ *
  *	YOU NEED TO MAKE CHANGES TO THIS FILE!
 */
 
@@ -21,8 +21,8 @@ public class Location implements LocationInterface, Cloneable
 	// properties
 	protected int row;			// the vertical component of the position
 	protected int column;		// the horizontal component of the position
-	
-	
+
+
 	/**
 	 *	Location
 	 *	Constructor method.
@@ -41,11 +41,13 @@ public class Location implements LocationInterface, Cloneable
       	trace("Location: Constructor starts");
 
 //COMPLETE ME
+		this.row = r;
+		this.column = c;
 
       	trace("Location: Constructor ends");
 	}
-	
-	
+
+
 	/**
 	 *	setRow
 	 *	Set method for "row" instance variable.
@@ -62,11 +64,12 @@ public class Location implements LocationInterface, Cloneable
       	trace("setRow: setRow starts");
 
 //COMPLETE ME
+		row = r;
 
       	trace("setRow: setRow ends");
 	}
-	
-	
+
+
 	/**
 	 *	setColumn
 	 *	Set method for "column" instance variable.
@@ -83,11 +86,12 @@ public class Location implements LocationInterface, Cloneable
       	trace("setColumn: setColumn starts");
 
 //COMPLETE ME
+		column = c;
 
       	trace("setColumn: setColumn ends");
 	}
-	
-	
+
+
 	/**
 	 *	getRow
 	 *	Get method for "row" instance variable.
@@ -105,10 +109,10 @@ public class Location implements LocationInterface, Cloneable
 
 //COMPLETE ME
 
-		return 0;	// CHANGE ME
+		return row;	// CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	getColumn
 	 *	Get method for "column" instance variable.
@@ -126,10 +130,10 @@ public class Location implements LocationInterface, Cloneable
 
 //COMPLETE ME
 
-		return 0;	// CHANGE ME
+		return column;	// CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	clone
 	 *	Clone variable for Location objects.
@@ -143,16 +147,17 @@ public class Location implements LocationInterface, Cloneable
 	public Object clone()
 	{
 		Location l;
-		
+
       	trace("clone: clone starts");
 
 //COMPLETE ME!
+		l = new Location(row, column);
 
       	trace("clone: clone ends");
-		return null;  // CHANGE ME
+		return l;  // CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	toString
 	 *	Convert the location to a String.
@@ -167,7 +172,7 @@ public class Location implements LocationInterface, Cloneable
 	public String toString()
 	{
       	trace("toString: toString starts and ends");
-      	
+
 		return ("row " + getRow() + " and column " + getColumn());
 	}
 

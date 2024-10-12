@@ -4,12 +4,12 @@
  *
  *	@author <<Your names and Student IDs>>
  *	@version September 2024
- *	
+ *
  *	This file holds the Queue ADT.  The Queue is built
  *	using a linked list of Node ADTs.  A Queue object
  *	consists of a "first" field which refers to a Node
  *	object.
- *	
+ *
  *	YOU NEED TO MAKE CHANGES TO THIS FILE!
 */
 
@@ -17,7 +17,7 @@
 public class Queue implements QueueInterface
 {
 	//finals
-	protected final boolean TRACING=true;				// do we want to see trace output?
+	protected final boolean TRACING=false;				// do we want to see trace output?
 
 	// properties
 	protected Node first;		// the node at the front of the queue
@@ -65,7 +65,7 @@ public class Queue implements QueueInterface
 	   	trace("Queue: Constructor ends");
 	}
 
-	
+
 	/**
 	 *	isEmpty
 	 *	Pre-condition: none
@@ -164,15 +164,15 @@ public class Queue implements QueueInterface
 	public void add(Object o)
 	{
 		Node c,n;
-		
+
 	   	trace("add: add starts");
 
 //COMPLETE ME
-		
+
 	   	trace("add: add ends");
 	}
 
-	
+
 	/**
 	 *	toString
 	 *	Convert the queue to a printable String representation.
@@ -189,9 +189,9 @@ public class Queue implements QueueInterface
 	{
 		Node c;
 		String s="";
-		
+
 	   	trace("toString: toString ends");
-	   			
+
 		if (isEmpty())
 		{
 		   	trace("toString: toString ends empty");

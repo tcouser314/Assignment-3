@@ -4,11 +4,11 @@
  *
  *	@author Julian Dermoudy
  *	@version September 2024
- *	
+ *
  *	This file holds the play() and other related
  *	routines from the sample solution.  The class is
  *	a frame that contains the graphical user interface.
- *	
+ *
  *	THIS FILE IS COMPLETE BUT YOU SHOULD MODIFY SOME FINAL VARIABLES DURING DEVELOPMENT
 */
 
@@ -20,9 +20,9 @@ import java.awt.event.*;
 public class TicTacToe extends Frame implements TicTacToeInterface, ActionListener, MouseListener
 {
 	// finals
-	protected final boolean TRACING=true;			// do we want to see trace output?
+	protected final boolean TRACING=false;			// do we want to see trace output?
 	protected final boolean HUMAN_VS_COMPUTER=false;	// is the user player against the computer?  CHANGE THIS ONCE GAME IS WORKING
-	
+
 	protected final int LOW_DIMENSION=3;			// low value for grid size range
 	protected final int HIGH_DIMENSION=19;			// high value for grid size range
 	protected final int BEGINNER=1;					// beginner look-ahead level
@@ -30,7 +30,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 	protected final int EXPERT=5;					// expert look-ahead level
 	protected final Player HUMAN=new Player(new Symbol(false));		// human (player 1) symbol (nought)
 	protected final Player COMPUTER=new Player(new Symbol(true));	// computer (player 2) symbol (cross)
-	
+
 	// GUI widgets
 	protected Label dimPrompt;			// prompt for dimension value
 	protected Label userStartsPrompt;	// prompt to see if player 1 wishes to start
@@ -44,7 +44,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 	protected Choice randL;				// menu for determining whether randome moves are allowed or not
 	protected Button playDF;			// button to play via Depth-First generated game tree
 	protected Button playBF;			// button to play via Breadth-First generated game tree (and two-human-player mode)
-	
+
 	// algorithmic values and settings
    	protected Stack dfst;				// an intermediate stack used for the depth-first search
    	protected Queue bfst;				// an intermediate queue used for the breadth-first search
@@ -62,8 +62,8 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 	protected boolean yourTurn;			// is it the human's turn?
 	protected boolean myTurn;			// is it the computer's turn?
 	protected boolean depthFirst;		// is the game tree to be generated via Depth-First?
-  
-  
+
+
   	/**
 	 *	TicTacToe
 	 *	Constructor method.
@@ -73,17 +73,17 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 	 *					and three drop-down menus
 	 *	Informally: construct the window for displaying the
 	 *				game and the game controls
-	 *	
+	 *
 	 *	@param a the title for the application's window
 	*/
 	public TicTacToe(String a)
-   	{  
+   	{
    		assert (a != null);
-   		
+
       	trace("TicTacToe: Constructor starts");
-      	
+
       	window=new Display();
-      	
+
       	// create frame and window listener
       	setLayout(new FlowLayout());
       	setTitle(a);
@@ -98,7 +98,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
       	);
      	setSize(630,705);
      	setResizable(false);
-     	
+
      	// initialise widgets
      	trace("TicTacToe: Adding GUI widgets");
 		dimPrompt=new Label("Dim.:");
@@ -149,7 +149,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 			playBF=new Button("Start");
 		}
 		add(playBF);
-		
+
 		// initialise game controls
 		trace("TicTacToe: Initialising game controls");
 		game=new GameTree();
@@ -160,7 +160,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 		depthFirst=true;
 		symmetries=true;
 		randomness=true;
-		
+
 		if (HUMAN_VS_COMPUTER)
 		{
 			playDF.addActionListener(this);
@@ -173,10 +173,10 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
       	setVisible(true);
       	window.setGraphics(getGraphics());
       	repaint();
-      	
+
       	trace("TicTacToe: Contructor ends");
    	}
-  
+
 
 	/**
 	 *	paint
@@ -202,12 +202,12 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 		double v;
 
 		assert (g != null);
-		
+
 		trace("paint: paint starts");
-		
+
 		super.paint(g);
       	window.setGraphics(g);
-      	
+
       	// deal with default set-up
 		if (starting)
 		{
@@ -216,7 +216,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 			board.showGrid(window);
 			myTurn=true;
 		}
-		
+
 		// game underway
 		if (playing)
 		{
@@ -249,14 +249,14 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 				        	trace("paint: generating the game tree depth-first");
 							s=new Stack();
 		  	      			game.buildGameDF(s,HUMAN,lookAhead);
-		  	      		}				
+		  	      		}
 		  	      		else
 		  	      		{
-		  	      			trace("paint: generating the game tree breadth-first");			
+		  	      			trace("paint: generating the game tree breadth-first");
 		  	      			q=new Queue();
 		  	      			game.buildGameBF(q,HUMAN,lookAhead);
-		  	      		}				
-		  	      		
+		  	      		}
+
 		  	      		// evaluate options and select move
 		  	      		trace("paint: game generated, evaluating options");
   						game.traverse();
@@ -265,12 +265,12 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 		        		game.findBest(v);
 						board = (Grid)game.getData();
 						trace("paint: move selected");
-						myTurn=false;	
-						repaint();		
-					}					
+						myTurn=false;
+						repaint();
+					}
 				}
-			}						
-			
+			}
+
 			// is it over?
       		if (board.gameOver())
       		{
@@ -313,11 +313,11 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 	        	}
 	        }
 	    }
-	    
+
 	    trace("paint: paint ends");
    	}
-   
-   
+
+
 	/**
 	 *	actionPerformed
 	 *	Handle mouse-clicks
@@ -333,9 +333,9 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 	public void actionPerformed(ActionEvent e)
    	{
    		assert (e != null);
-   		
+
    		trace("actionPerformed: actionPerformed starts");
-   		
+
 		// which button was pressed?
  		if (e.getSource() == playDF)
  		{
@@ -352,11 +352,11 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 
 		// play out turn
 		play();
-		
+
 		trace("actionPerformed: actionPerformed ends");
    	}
-   	
-   	
+
+
 	/**
 	 *	play
 	 *	Set-up game parameters; mouse activity drives remainder of game
@@ -369,9 +369,9 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 		int maxLevels;
 		boolean userStarts;
 		Symbol y;
-		
+
 		trace("play: play starts");
-		
+
 		//initialise variables
 		starting=false;
 		playing=false;
@@ -401,7 +401,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 				{
 					maxLevels--;
 				}
-				
+
 				// create game proper
 				board=new Grid(dim);
 				game=new GameTree(board,1);
@@ -443,7 +443,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 			window.getGraphics().drawString("Number please!",10,695);
 		}
 		repaint();
-		
+
 		trace("play: play ends");
 	}
 
@@ -452,14 +452,14 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 	{
 		//method is complete
 	}
-	
-	
+
+
 	public void mouseClicked(MouseEvent e)
 	{
 		//method is complete
 	}
-	
-	
+
+
 	/**
 	 *	mouseReleased
 	 *	Deal with moves from human player(s).
@@ -483,7 +483,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 		int x,y;
 
 		assert (e != null);
-		
+
 		trace("mouseReleased: mouseReleased starts");
 
 		if ((! game.isEmpty()) && (starting || playing) && (yourTurn))
@@ -543,17 +543,17 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 				}
 			}
 		}
-		
+
 		trace("mouseReleased: mouseReleased ends");
 	}
-	
-	
+
+
 	public void mouseEntered(MouseEvent e)
 	{
 		//method is complete
 	}
-	
-	
+
+
 	public void mouseExited(MouseEvent e)
 	{
 		//method is complete

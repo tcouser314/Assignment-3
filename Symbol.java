@@ -4,12 +4,12 @@
  *
  *	@author <<Your names and Student IDs>>
  *	@version September 2024
- *	
+ *
  *	This file holds the Symbol ADT which represents
  *	pieces within the two-dimensional grid.
  *	A Symbol consists of a representation of a nought, cross
  *	or empty.
- *	
+ *
  *	YOU NEED TO MAKE CHANGES TO THIS FILE!
 */
 
@@ -26,8 +26,8 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 
 	// properties
 	protected SymbolValue symbol;	// empty, nought, or cross
-	
-	
+
+
 	/**
 	 *	Symbol
 	 *	Constructor method 1.
@@ -44,8 +44,8 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 
       	trace("Symbol: Constructor ends");
 	}
-	
-	
+
+
 	/**
 	 *	Symbol
 	 *	Constructor method 2.
@@ -73,8 +73,8 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 
       	trace("Symbol: Constructor ends");
 	}
-	
-	
+
+
 	/**
 	 *	Symbol
 	 *	Constructor method 3.
@@ -90,11 +90,12 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
      	trace("Symbol: Constructor starts");
 
 //COMPLETE ME
+		this.symbol = s;
 
       	trace("Symbol: Constructor ends");
 	}
-	
-	
+
+
 	/**
 	 *	setSymbol
 	 *	Set method for "symbol" instance variable.
@@ -109,20 +110,21 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 	protected void setSymbol(SymbolValue s)
 	{
 		assert (s != null);
-		
+
       	trace("setSymbol: setSymbol starts");
 
 //COMPLETE ME
+		symbol = s;
 
       	trace("setSymbol: setSymbol ends");
 	}
-	
-	
+
+
 	/**
 	 *	makeEmpty
 	 *	Set method for "symbol" instance variables.
 	 *	Pre-condition: none
-	 *	Post-condition: the Symbol object's value is altered to hold 
+	 *	Post-condition: the Symbol object's value is altered to hold
 	 *					EMPTY
 	 *	Informally: assign the value of EMPTY to the Symbol object's
 	 *					symbol instance variable
@@ -132,11 +134,12 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
       	trace("makeEmpty: makeEmpty starts");
 
 //COMPLETE ME
+		symbol = SymbolValue.EMPTY;
 
-      	trace("makeEmpty: makeEmpty ends");
+    	trace("makeEmpty: makeEmpty ends");
 	}
-	
-	
+
+
 	/**
 	 *	getSymbol
 	 *	Get method for "symbol" instance variable.
@@ -153,16 +156,16 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 
 //COMPLETE ME
 
-		return null;	// CHANGE ME
+		return symbol;	// CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	isEmpty
 	 *	Doer method for determining if symbol instance variable is EMPTY.
 	 *	Pre-condition: none
 	 *	Post-condition: the result of comparing the Symbol object's symbol
-	 *					instance variable with EMPTY is returned 
+	 *					instance variable with EMPTY is returned
 	 *	Informally: examine the Symbol object's symbol instance variable
 	 *					returning whether it is EMPTY
 	 *
@@ -174,10 +177,10 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 
 //COMPLETE ME
 
-		return false;	// CHANGE ME
+		return symbol == SymbolValue.EMPTY;	// CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	compareTo
 	 *	Test equality of symbols.
@@ -194,9 +197,9 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 	public int compareTo(Object o)
 	{
 		Symbol s;
-		
+
  		assert ((o instanceof Symbol) && (o!=null));
-		
+
      	trace("compareTo: compareTo starts");
 
 		s=(Symbol) o;
@@ -207,14 +210,14 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 			return 0;
 		}
 		else
-		{	
+		{
 			// different value
   	    	trace("compareTo: compareTo ends (1)");
 			return 1;  // order is arbitrary
 		}
 	}
-	
-	
+
+
 	/**
 	 *	equals
 	 *	Test equality of symbols.
@@ -230,15 +233,25 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 	public boolean equals(Symbol s)
 	{
  		assert (s!=null);
-		
+
       	trace("equals: equals starts and ends");
 
-//COMPLETE ME
+		boolean result = false;
 
-		return false;	// CHANGE ME
+//COMPLETE ME
+		if (compareTo(s) == 0)
+		{
+			result = true;
+		}
+		else
+		{
+			result = false;
+		}
+
+		return result;	// CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	opponent
 	 *	Provide the opponent to a symbol.
@@ -252,7 +265,7 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 	public Symbol opponent()
 	{
 		Symbol s;	// result
-		
+
       	trace("opponent: opponent starts");
 
 		s=new Symbol();
@@ -264,12 +277,12 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 						 break;
 			case EMPTY:  break;
 		}
-						
+
       	trace("opponent: opponent ends");
 		return s;
 	}
-	
-	
+
+
 	/**
 	 *	clone
 	 *	Clone a symbol.
@@ -282,16 +295,16 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 	public Object clone()
 	{
 		Symbol s;	// result
-		
+
       	trace("clone: clone starts");
 
 		s=new Symbol(getSymbol());
-		
+
       	trace("clone: clone ends");
 		return s;
 	}
-	
-	
+
+
 	/**
 	 *	showSymbol
 	 *	Display method for Symbol
@@ -318,10 +331,10 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 		assert ((s!=null) && (l!=null) && (w>0));
 
       	trace("showSymbol: showSymbol starts");
-		
+
 		r=l.getRow();
 		c=l.getColumn();
-		
+
 		switch (symbol) {
 		  case EMPTY:  trace("showSymbol: it's empty");
 		  			   break;
@@ -355,8 +368,8 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 
       	trace("showSymbol: showSymbol ends");
 	}
-	
-	
+
+
 	/**
 	 *	toString
 	 *	Convert the symbol to a printable representation.

@@ -4,23 +4,23 @@
  *
  *	@author Julian Dermoudy
  *	@version September 2024
- *	
+ *
  *	This file holds the Player ADT which represents
  *	the concept of a game participant.
  *	A Player consists of a nought or cross symbol.
- *	
+ *
  *	This file is complete.
 */
 
 public class Player implements PlayerInterface, Comparable, Cloneable
 {
 	//finals
-	protected final boolean TRACING=true;		// do we want to see trace output?
+	protected final boolean TRACING=false;		// do we want to see trace output?
 
 	// properties
 	protected Symbol symbol;		// the player's symbol
-	
-	
+
+
 	/**
 	 *	Player
 	 *	Constructor method.
@@ -40,8 +40,8 @@ public class Player implements PlayerInterface, Comparable, Cloneable
 
       	trace("Player: Constructor starts");
 	}
-	
-	
+
+
 	/**
 	 *	setSymbol
 	 *	Set method for "symbol" instance variable.
@@ -56,15 +56,15 @@ public class Player implements PlayerInterface, Comparable, Cloneable
 	public void setSymbol(Symbol s)
 	{
 		assert (s!=null);
-		
+
       	trace("setSymbol: setSymbol starts");
 
 		symbol=s;
 
       	trace("setSymbol: setSymbol ends");
 	}
-	
-	
+
+
 	/**
 	 *	getSymbol
 	 *	Get method for "symbol" instance variable.
@@ -81,8 +81,8 @@ public class Player implements PlayerInterface, Comparable, Cloneable
 
 		return symbol;
 	}
-	
-	
+
+
 	/**
 	 *	compareTo
 	 *	Test equality of player.
@@ -99,17 +99,17 @@ public class Player implements PlayerInterface, Comparable, Cloneable
 	public int compareTo(Object o)
 	{
 		Player p;
-		
+
 		assert (o instanceof Player);
-		
+
       	trace("compareTo: compareTo starts and ends");
-      	
+
 		p=(Player) o;
 
 		return (symbol.compareTo(p.getSymbol()));
 	}
-	
-	
+
+
 	/**
 	 *	opponent
 	 *	Find the opponent
@@ -123,16 +123,16 @@ public class Player implements PlayerInterface, Comparable, Cloneable
 	public Player opponent()
 	{
 		Player p;
-		
+
       	trace("opponent: opponent starts with " + symbol.toString());
 
 		p=new Player(getSymbol().opponent());
-	   		
+
 		trace("opponent: opponent ends with " + p.getSymbol().toString());
 		return p;
 	}
-	
-	
+
+
 	/**
 	 *	equals
 	 *	Test equality of player symbols.
@@ -150,7 +150,7 @@ public class Player implements PlayerInterface, Comparable, Cloneable
 	public boolean equals(Player p)
 	{
 		assert (p!=null);
-		
+
       	trace("equals: equals starts and ends");
 
 		return (this.compareTo(p) == 0);
@@ -171,7 +171,7 @@ public class Player implements PlayerInterface, Comparable, Cloneable
 		Player p=new Player((Symbol) getSymbol().clone());
 
       	trace("clone: clone starts and ends");
-		
+
 		return p;
 	}
 

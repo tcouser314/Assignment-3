@@ -4,12 +4,12 @@
  *
  *	@author <<Your names and Student IDs>>
  *	@version September 2024
- *	
+ *
  *	This file holds the Stack ADT.  The Stack is built
  *	using a linked list of Node ADTs.  A Stack object
  *	consists of a "tos" field which refers to a Node
  *	object.
- *	
+ *
  *	YOU NEED TO MAKE CHANGES TO THIS FILE!
 */
 
@@ -17,7 +17,7 @@
 public class Stack implements StackInterface
 {
 	//finals
-	protected final boolean TRACING=true;				// do we want to see trace output?
+	protected final boolean TRACING=false;				// do we want to see trace output?
 
 	// properties
 	protected Node tos;		// the node on the top of the stack
@@ -63,8 +63,8 @@ public class Stack implements StackInterface
 
       	trace("Stack: Constructor ends");
 	}
-	
-	
+
+
 	/**
 	 *	isEmpty
 	 *	Check whether the stack is empty or not.
@@ -141,7 +141,7 @@ public class Stack implements StackInterface
 	      	trace("pop: adjusting top of stack");
 //COMPLETE ME
 		}
-		
+
       	trace("pop: pop ends");
 	}
 
@@ -163,15 +163,15 @@ public class Stack implements StackInterface
 	public void push(Object o)
 	{
 		Node n;
-		
+
       	trace("push: push starts");
-      	
+
 //COMPLETE ME
 
       	trace("push: push ends");
 	}
-	
-	
+
+
 	/**
 	 *	toString
 	 *	Convert the contents of the stack to a printable representation.
@@ -189,7 +189,7 @@ public class Stack implements StackInterface
 	{
 		Node c;
 		String s="";
-		
+
       	trace("toString: toString starts");
 
 		if (isEmpty())

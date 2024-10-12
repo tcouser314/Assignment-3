@@ -4,11 +4,11 @@
  *
  *	@author <<Your names and Student IDs>>
  *	@version September 2024
- *	
+ *
  *	This file holds the Square ADT which represents
  *	a physical space within a grid.  A Square in a
  *	grid consists of a location, and a symbol.
- *	
+ *
  *	YOU NEED TO MAKE CHANGES TO THIS FILE!
 */
 
@@ -16,15 +16,15 @@ import java.awt.*;
 
 
 public class Square implements SquareInterface, Cloneable
-{	
+{
 	//finals
 	protected final boolean TRACING=true;				// do we want to see trace output?
 
 	// properties
 	protected Location loc;		// the location of the current square within the grid
 	protected Symbol symbol;	// the symbol of the current square
-	
-	
+
+
 	/**
 	 *	Square
 	 *	Constructor method 1.
@@ -38,14 +38,16 @@ public class Square implements SquareInterface, Cloneable
 	public Square(Location l)
 	{
 		assert (l!=null);
-		
+
       	trace("Square: Constructor starts");
 
 //COMPLETE ME
+		this.loc = l;
+
       	trace("Square: Constructor ends");
 	}
-	
-	
+
+
 	/**
 	 *	Square
 	 *	Constructor method 2.
@@ -62,15 +64,17 @@ public class Square implements SquareInterface, Cloneable
 	public Square(Location l,Symbol s)
 	{
 		assert ((l!=null) && (s!=null));
-		
+
       	trace("Square: Constructor starts");
 
 //COMPLETE ME
+		this.loc = l;
+		this.symbol = s;
 
       	trace("Square: Constructor ends");
 	}
-	
-	
+
+
 	/**
 	 *	clone
 	 *	Copy the square.
@@ -83,17 +87,18 @@ public class Square implements SquareInterface, Cloneable
 	public Object clone()
 	{
 		Square s;
-		
+
 		assert ((getLocation() != null) && (getSymbol() != null));
       	trace("clone: clone starts");
 
 // COMPLETE ME
+		s = new Square(loc, symbol);
 
       	trace("clone: clone ends");
-		return null;	// CHANGE ME
+		return s;	// CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	getLocation
 	 *	Get method for "loc" instance variable.
@@ -109,8 +114,8 @@ public class Square implements SquareInterface, Cloneable
 
 		return loc;
 	}
-	
-	
+
+
 	/**
 	 *	setLocation
 	 *	Set method for "loc" instance variable.
@@ -127,15 +132,15 @@ public class Square implements SquareInterface, Cloneable
 	public void setLocation(Location l)
 	{
 		assert (l!=null);
-		
+
       	trace("setLocation: setLocation ends");
 
 		loc=l;
 
       	trace("setLocation: setLocation ends");
 	}
-	
-	
+
+
 	/**
 	 *	getSymbol
 	 *	Get method for "symbol" instance variable.
@@ -152,8 +157,8 @@ public class Square implements SquareInterface, Cloneable
 
 		return symbol;
 	}
-	
-	
+
+
 	/**
 	 *	setSymbol
 	 *	Set method for "symbol" instance variable.
@@ -174,8 +179,8 @@ public class Square implements SquareInterface, Cloneable
 
       	trace("setSymbol: setSymbol ends");
 	}
-	
-	
+
+
 	/**
 	 *	isEmpty
 	 *	Check whether square is occupied.
@@ -190,16 +195,19 @@ public class Square implements SquareInterface, Cloneable
 	public boolean isEmpty()
 	{
 		Symbol empty;
-		
+
       	trace("isEmpty: isEmpty starts");
 
 //COMPLETE ME
+		empty = symbol;
+		boolean Empty = (empty == null);
+
 
 		trace("isEmpty: isEmpty ends");
-		return false;	// CHANGE ME
+		return Empty;	// CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	showSquare
 	 *	Display the square.
@@ -219,26 +227,26 @@ public class Square implements SquareInterface, Cloneable
 	{
 		int x,y;
 		Graphics g;
-		
+
 		assert (s!=null);
-		
+
       	trace("toString: toString starts");
-		
+
 		x=(loc.getColumn()-1)*(w+5) + 5;
 		y=70 + (loc.getRow()-1)*(w+5);
-		
+
 		g=s.getGraphics();
 		g.setColor(new Color(77,77,77));
 		g.fillRect(x+5,y+5,w,w);
 		g.setColor(Color.black);
 
-		trace("toString: square is " + toString());	
+		trace("toString: square is " + toString());
 		symbol.showSymbol(s,loc,w);
-		
+
       	trace("toString: toString ends");
 	}
-	
-	
+
+
 	/**
 	 *	toString
 	 *	Convert the Square to a printable representation
@@ -253,7 +261,7 @@ public class Square implements SquareInterface, Cloneable
 	public String toString()
 	{
       	trace("toString: toString starts and ends");
-      	
+
 		return symbol.toString();
 	}
 
