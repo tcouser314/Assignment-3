@@ -39,7 +39,7 @@ public class GameTree implements GameTreeInterface
 	{
 		trace("GameTree: constructor starts");
 
-//COMPLETE ME
+		this.root = null;
 
 		trace("GameTree: constructor ends");
 	}
@@ -111,8 +111,8 @@ public class GameTree implements GameTreeInterface
 		}
 
 		trace("getData: getData ends");
-//COMPLETE ME
-		return null;	//CHANGE ME
+
+		return this.root.getData();	//CHANGE ME
 	}
 
 
@@ -129,8 +129,8 @@ public class GameTree implements GameTreeInterface
 	public boolean getRandomness()
 	{
 		trace("getRandomness: getRandomness starts and ends");
-//COMPLETE ME
-		return false;	//CHANGE ME
+
+		return moveRandomly;	//CHANGE ME
 }
 
 
@@ -147,8 +147,8 @@ public class GameTree implements GameTreeInterface
 	public boolean getSymmetries()
 	{
 		trace("getSymmetries: getSymmetries starts and ends");
-//COMPLETE ME
-		return false;	//CHANGE ME
+
+		return symmetryAllowed;	//CHANGE ME
 }
 
 

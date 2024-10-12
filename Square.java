@@ -15,6 +15,7 @@
 import java.awt.*;
 
 
+
 public class Square implements SquareInterface, Cloneable
 {
 	//finals
@@ -41,7 +42,7 @@ public class Square implements SquareInterface, Cloneable
 
       	trace("Square: Constructor starts");
 
-//COMPLETE ME
+		this.symbol = new Symbol();
 		this.loc = l;
 
       	trace("Square: Constructor ends");
@@ -67,7 +68,6 @@ public class Square implements SquareInterface, Cloneable
 
       	trace("Square: Constructor starts");
 
-//COMPLETE ME
 		this.loc = l;
 		this.symbol = s;
 
@@ -91,11 +91,13 @@ public class Square implements SquareInterface, Cloneable
 		assert ((getLocation() != null) && (getSymbol() != null));
       	trace("clone: clone starts");
 
-// COMPLETE ME
-		s = new Square(loc, symbol);
+		// Location loc = (Location) this.getLocation();
+		// Symbol symbol = (Symbol) this.getSymbol();
+
+		s = new Square(this.loc, this.symbol);
 
       	trace("clone: clone ends");
-		return s;	// CHANGE ME
+		return s;
 	}
 
 
@@ -135,7 +137,7 @@ public class Square implements SquareInterface, Cloneable
 
       	trace("setLocation: setLocation ends");
 
-		loc=l;
+		this.loc=l;
 
       	trace("setLocation: setLocation ends");
 	}
@@ -155,7 +157,7 @@ public class Square implements SquareInterface, Cloneable
 	{
       	trace("getSymbol: getSymbol starts and ends");
 
-		return symbol;
+		return this.symbol;
 	}
 
 
@@ -175,7 +177,7 @@ public class Square implements SquareInterface, Cloneable
 	{
       	trace("setSymbol: setSymbol ends");
 
-		symbol=s;
+		this.symbol=s;
 
       	trace("setSymbol: setSymbol ends");
 	}
@@ -199,12 +201,11 @@ public class Square implements SquareInterface, Cloneable
       	trace("isEmpty: isEmpty starts");
 
 //COMPLETE ME
-		empty = symbol;
-		boolean Empty = (empty == null);
-
+		empty = this.symbol;
+		boolean Empty = empty.isEmpty();
 
 		trace("isEmpty: isEmpty ends");
-		return Empty;	// CHANGE ME
+		return Empty;
 	}
 
 

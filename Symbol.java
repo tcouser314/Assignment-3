@@ -16,7 +16,7 @@
 import java.awt.*;
 
 
-public class Symbol implements SymbolInterface, Cloneable, Comparable
+public class Symbol implements SymbolInterface, Cloneable
 {
 	// class-level types
 	enum SymbolValue {EMPTY, NOUGHT, CROSS};
@@ -40,7 +40,7 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 	{
       	trace("Symbol: Constructor starts");
 
-		symbol=SymbolValue.EMPTY;
+		this.symbol=SymbolValue.EMPTY;
 
       	trace("Symbol: Constructor ends");
 	}
@@ -64,11 +64,11 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 
 		if (x)
 		{
-			symbol=SymbolValue.CROSS;
+			this.symbol = SymbolValue.CROSS;
 		}
 		else
 		{
-			symbol=SymbolValue.NOUGHT;
+			this.symbol = SymbolValue.NOUGHT;
 		}
 
       	trace("Symbol: Constructor ends");
@@ -89,7 +89,6 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 	{
      	trace("Symbol: Constructor starts");
 
-//COMPLETE ME
 		this.symbol = s;
 
       	trace("Symbol: Constructor ends");
@@ -113,8 +112,7 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 
       	trace("setSymbol: setSymbol starts");
 
-//COMPLETE ME
-		symbol = s;
+		this.symbol = s;
 
       	trace("setSymbol: setSymbol ends");
 	}
@@ -133,8 +131,7 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 	{
       	trace("makeEmpty: makeEmpty starts");
 
-//COMPLETE ME
-		symbol = SymbolValue.EMPTY;
+		this.symbol = SymbolValue.EMPTY;
 
     	trace("makeEmpty: makeEmpty ends");
 	}
@@ -154,9 +151,21 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 	{
       	trace("getSymbol: getSymbol starts and ends");
 
-//COMPLETE ME
+		// int result = 0;
+		// if (this.symbol == SymbolValue.EMPTY)
+		// {
+		// 	result = 0;
+		// }
+		// else if (this.symbol == SymbolValue.NOUGHT)
+		// {
+		// 	result = 1;
+		// }
+		// else if (this.symbol == SymbolValue.CROSS)
+		// {
+		// 	result = 2;
+		// }
 
-		return symbol;	// CHANGE ME
+		return this.symbol;	// CHANGE ME
 	}
 
 
@@ -175,9 +184,7 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 	{
       	trace("isEmpty: isEmpty starts and ends");
 
-//COMPLETE ME
-
-		return symbol == SymbolValue.EMPTY;	// CHANGE ME
+		return (this.symbol == SymbolValue.EMPTY);	// CHANGE ME
 	}
 
 
@@ -238,7 +245,6 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 
 		boolean result = false;
 
-//COMPLETE ME
 		if (compareTo(s) == 0)
 		{
 			result = true;
@@ -248,7 +254,7 @@ public class Symbol implements SymbolInterface, Cloneable, Comparable
 			result = false;
 		}
 
-		return result;	// CHANGE ME
+		return result;
 	}
 
 

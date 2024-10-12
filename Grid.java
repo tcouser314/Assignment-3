@@ -17,7 +17,7 @@
 import java.awt.*;
 
 
-public class Grid implements GridInterface, Cloneable, Comparable
+public class Grid implements GridInterface, Cloneable
 {
 	//finals
 	protected final boolean TRACING=true;	// do we want to see trace output?
@@ -172,6 +172,15 @@ public class Grid implements GridInterface, Cloneable, Comparable
 			for (c=1; c<=dimension; c++)
 			{
 				// up to here after Saturday night 12/10
+				l=new Location(r,c);
+				try
+				{
+					b.setSquare(l, (Square) this.getSquare(l).clone());
+				}
+				catch (IllegalGridException e)
+				{
+					trace("clone: location not on grid");
+				}
 			}
 		}
 
@@ -353,12 +362,18 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	public void occupySquare(Location l, Symbol s)
 	{
 		Square q;
+		int r, c;
 
 		assert ((l!=null) && (s!=null));
 
       	trace("occupySquare: occupySquare starts");
 
 //COMPLETE ME
+		q = new Square(l, s);
+		r = l.getRow();
+		c = l.getColumn();
+
+		board[r-1][c-1] = q;
 
       	trace("occupySquare: occupySquare ends");
 	}
@@ -384,8 +399,10 @@ public class Grid implements GridInterface, Cloneable, Comparable
 
       	trace("squareOccupied: squareOccupied starts and ends");
 //COMPLETE ME
+		Symbol s = getSymbol(l);
+		boolean isOccupied = (s == null);
 
-		return false;	//CHANGE ME
+		return isOccupied;	//CHANGE ME
 	}
 
 
@@ -399,16 +416,23 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	 *	Informally: return the symbol at the given location
 	 *					of the grid
 	 *
-	 *	@param l Location of square lo look in
+	 *	@param l Location of square to look in
 	 *	@return Symbol whatever is in the square of given Location
 	*/
 	public Symbol getSymbol(Location l)
 	{
 		assert (l!=null);
+		int r, c;
 
       	trace("getSymbol: getSymbol starts and ends");
 //COMPLETE ME
-		return null;	//CHANGE ME
+
+		r = l.getRow();
+		c = l.getColumn();
+		Square s = board[r-1][c-1];
+		Symbol symbol = s.getSymbol();
+
+		return symbol;	//CHANGE ME
 	}
 
 
@@ -430,15 +454,21 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	{
 		int r;
 		int c;
+		boolean isValid;
+
 
 		assert (l!=null);
 
       	trace("validMove: validMove starts");
 
 //COMPLETE ME
+		r = l.getRow();
+		c = l.getColumn();
+
+		isValid = (1 <= r && r <= dimension) && (1 <= c && c <= dimension);
 
       	trace("validMove: validMove ends");
-		return false;	//CHANGE ME
+		return isValid;	//CHANGE ME
 	}
 
 
@@ -500,9 +530,13 @@ public class Grid implements GridInterface, Cloneable, Comparable
       	trace("gameOver: gameOver starts");
 
 //COMPLETE ME
+		if (win() != new Symbol() || draw())
+		{
+			res = true;
+		}
 
 		trace("gameOver: gameOver ends");
-		return false;	//CHANGE ME
+		return res;	//CHANGE ME
     }
 
 
@@ -1320,9 +1354,26 @@ public class Grid implements GridInterface, Cloneable, Comparable
  	{
  		assert (g!=null);
 
+		int r, c;
+
       	trace("equals: equals starts and ends");
 //COMPLETE ME
-		return false;	//CHANGE ME
+		for (r = 1; r <= dimension; r++)
+		{
+			for (c = 1; c <= dimension; c++)
+			{
+				Location l = new Location(r, c);
+				Square s1 = getSquare(l);
+				Square s2 = g.getSquare(l);
+
+				if (!s1.equals(s2))
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;	//CHANGE ME
  	}
 
 
