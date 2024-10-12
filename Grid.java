@@ -4,13 +4,13 @@
  *
  *	@author <<Your names and Student IDs>>
  *	@version September 2024
- *	
+ *
  *	This file holds the Grid ADT which represents
  *	the Tic-Tac-Toe board.  The Grid consists of a location
  *	(of	the current position of the solver), a dimension,
  *	a value (of the current board), and a two-dimensional
  *	array (table/matrix) of the squares in the board.
- *	
+ *
  *	YOU NEED TO MAKE CHANGES TO THIS FILE!
 */
 
@@ -27,7 +27,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	protected Square board[][];			// all the Squares within the grid
 	protected int value;				// 'worth' of grid
 
-	
+
 	/**
 	 *	Grid
 	 *	Constructor method 1.
@@ -40,13 +40,13 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	{
       	trace("Grid: Constructor starts");
 
-		dimension=3;		
+		dimension=3;
 		initialiseGrid();
 
       	trace("Grid: Constructor ends");
 	}
-	
-	
+
+
 	/**
 	 *	Grid
 	 *	Constructor method 2.
@@ -60,13 +60,13 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	public Grid(int d)
 	{
       	trace("Grid: Constructor starts");
-      	
-//COMPLETE ME		
 
-      	trace("Grid: Constructor ends");		
+//COMPLETE ME
+
+      	trace("Grid: Constructor ends");
 	}
-	
-	
+
+
 	/*
 	 *	Grid
 	 *	Constructor method 3.
@@ -88,7 +88,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	public Grid(int d, Location l, Symbol s) throws IllegalGridException
 	{
 		assert ((d>0) && (l!=null) && (s!=null));
-		
+
       	trace("Grid: Constructor starts");
 
 		// create an empty grid of required size
@@ -109,8 +109,8 @@ public class Grid implements GridInterface, Cloneable, Comparable
 
       	trace("Grid: Constructor ends");
 	}
-	
-	
+
+
 	/**
 	 *	initialiseGrid
 	 *	Set up the grid.
@@ -125,9 +125,9 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	{
 		int r,c;
 		Location l;
-		
+
       	trace("initialiseGrid: initialiseGrid starts");
-      	
+
 		// instantiate the table (array of arrays)
 		board=new Square[dimension][dimension];
 		// initialise every square on the board
@@ -141,11 +141,11 @@ public class Grid implements GridInterface, Cloneable, Comparable
 		}
 		// initialise the starting value
 		value=0;
-		
-      	trace("initialiseGrid: initialiseGrid ends");		
+
+      	trace("initialiseGrid: initialiseGrid ends");
 	}
-	
-	
+
+
 	/**
 	 *	clone
 	 *	Copy the grid.
@@ -160,16 +160,16 @@ public class Grid implements GridInterface, Cloneable, Comparable
 		Grid b;
 		int r,c;
 		Location l;
-		
+
       	trace("clone: clone starts");
-      	
+
 //COMPLETE ME
 
       	trace("clone: clone ends");
 		return null;	//CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	setSquare
 	 *	Set method for an element of the "board" instance variable.
@@ -182,27 +182,27 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	 *
 	 *	@param l Location for the square
 	 *	@param s Square to be stored within grid
-	*/	
+	*/
 	public void setSquare(Location l, Square s) throws IllegalGridException
 	{
 		int r;
 		int c;
-		
+
 		assert ((l!=null) && (s!=null));
-		
+
       	trace("setSquare: setSquare starts");
-      	
+
 		if (!validMove(l))
 		{
 			trace("setSquare: location not on the grid");
 			throw new IllegalGridException();
 		}
-		
+
 		// update the grid at the indicated location with the given square
 		s.setLocation(l);
 		r=l.getRow();
 		c=l.getColumn();
-		
+
 		board[r-1][c-1]=s;
 
       	trace("setSquare: setSquare ends");
@@ -229,24 +229,24 @@ public class Grid implements GridInterface, Cloneable, Comparable
 		int c;
 
 		assert (l!=null);
-		
+
       	trace("getSquare: getSquare starts");
 
 		r=l.getRow();
 		c=l.getColumn();
-		
+
 		if (!validMove(l))
 		{
 			trace("getSquare: location not on grid");
 			throw new IllegalGridException();
 		}
-		
+
 		// obtain the square at the indicated location from the grid
       	trace("getSquare: getSquare ends");
 		return board[r-1][c-1];
 	}
-		
-		
+
+
 	/**
 	 *	setDimension
 	 *	Set method for the "dimension" instance variable.
@@ -261,10 +261,10 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	public void setDimension(int d)
 	{
 		assert (d>0);
-		
+
       	trace("setDimension: setDimension starts");
-      	
-//COMPLETE ME		
+
+//COMPLETE ME
       	trace("setDimension: setDimension ends");
 	}
 
@@ -300,12 +300,12 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	public void setWorth(int v)
 	{
       	trace("setWorth: setWorth starts");
-      	
-//COMPLETE ME		
+
+//COMPLETE ME
       	trace("setWorth: setWorth ends");
 	}
-	
-	
+
+
 	/**
 	 *	getWorth
 	 *	Get method for "value" instance variable.
@@ -322,8 +322,8 @@ public class Grid implements GridInterface, Cloneable, Comparable
 //COMPLETE ME
 		return 0.0;	//CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	occupySquare
 	 *	Make a move.
@@ -340,9 +340,9 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	public void occupySquare(Location l, Symbol s)
 	{
 		Square q;
- 
+
 		assert ((l!=null) && (s!=null));
-		
+
       	trace("occupySquare: occupySquare starts");
 
 //COMPLETE ME
@@ -368,14 +368,14 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	public boolean squareOccupied(Location l)
 	{
 		assert (l!=null);
-		
+
       	trace("squareOccupied: squareOccupied starts and ends");
 //COMPLETE ME
 
 		return false;	//CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	getSymbol
 	 *	Observe symbol at given location.
@@ -392,13 +392,13 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	public Symbol getSymbol(Location l)
 	{
 		assert (l!=null);
-		
+
       	trace("getSymbol: getSymbol starts and ends");
 //COMPLETE ME
 		return null;	//CHANGE ME
 	}
-	
-	
+
+
 	/**
 	 *	validMove
 	 *	Check if a location is in the grid.
@@ -419,9 +419,9 @@ public class Grid implements GridInterface, Cloneable, Comparable
 		int c;
 
 		assert (l!=null);
-		
+
       	trace("validMove: validMove starts");
-      	
+
 //COMPLETE ME
 
       	trace("validMove: validMove ends");
@@ -446,7 +446,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	{
   		int r,c;
   		Location l;
-  
+
       	trace("fullGrid: fullGrid starts");
 
 		// check every square on the grid
@@ -463,12 +463,12 @@ public class Grid implements GridInterface, Cloneable, Comparable
     			}
     		}
 		}
-		
-      	trace("fullGrid: fullGrid ends");		
+
+      	trace("fullGrid: fullGrid ends");
   		return true;
 	}
 
-	
+
 	/**
 	 *	gameOver
 	 *	Check if the game is over.
@@ -507,23 +507,23 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	public Symbol win()
 	{
   		Symbol res;
-  
+
       	trace("win: win starts");
 
 		// check the diagonals
-  		res=diagWin();    
+  		res=diagWin();
   		if (res.compareTo(new Symbol()) == 0)
   		{
 			// no diagonal win, check the rows
     		res=horizWin();
-      
+
     		if (res.compareTo(new Symbol()) == 0)
       		{
 				// no diagonal or horizontal win, check the columns
       			res=vertWin();
       		}
   		}
-  
+
       	trace("win: win ends");
   		return res;
 	}
@@ -576,7 +576,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	protected Symbol diagWin()
 	{
 		Symbol res;
-		
+
       	trace("diagWin: diagWin starts");
 
 		// check the left diagonal
@@ -614,14 +614,14 @@ public class Grid implements GridInterface, Cloneable, Comparable
 		int r,c;
 		Location l;
   		boolean win;
-  
+
       	trace("leftDiagWin: leftDiagWin starts");
 		// systematically, check the left diagonal
   		r=1;
   		c=1;
   		l=new Location(r,c);
   		res=getSquare(l).getSymbol();
-  
+
   		win=true;
   		c++;
   		r++;
@@ -646,7 +646,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	      	trace("leftDiagWin: leftDiagWin ends");
     		return res;
     	}
-		
+
 		// no win on the left diagonal
       	trace("leftDiagWin: leftDiagWin ends");
 		return (new Symbol());
@@ -671,14 +671,14 @@ public class Grid implements GridInterface, Cloneable, Comparable
 		int r,c;
 		Location l;
   		boolean win;
-  
+
       	trace("rightDiagWin: rightDiagWin starts");
 		// systematically, check the right diagonal
 		r=1;
   		c=dimension;
   		l=new Location(r,c);
   		res=getSquare(l).getSymbol();
-  
+
   		win=true;
   		c--;
   		r++;
@@ -703,7 +703,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
 			trace("rightDiagWin: rightDiagWin ends");
     		return res;
     	}
-		
+
 		// no win on the right diagonal
 		trace("rightDiagWin: rightDiagWin ends");
 		return (new Symbol());
@@ -727,7 +727,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
   		int r,c;
   		Location l;
   		boolean win;
-  
+
       	trace("horizWin: horizWin starts");
 		// systematically, check the rows
   		for (r=1; r<=dimension; r++)
@@ -780,7 +780,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
   		int r,c;
   		Location l;
   		boolean win;
-  
+
       	trace("vertWin: vertWin starts");
 		// systematically, check the columns
 		for (c=1; c<=dimension; c++)
@@ -830,9 +830,9 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	{
   		Symbol w;
   		int playerTotal;
-  
+
 		assert (p!=null);
-		
+
       	trace("evaluateGrid: evaluateGrid starts");
 
 		// find out what the grid's worth from the given player's perspective
@@ -894,9 +894,9 @@ public class Grid implements GridInterface, Cloneable, Comparable
 		Location l;
 		int playerRow, oppRow;
 		int playerTotal;
-		
+
 		assert (p!=null);
-		
+
       	trace("evaluateRows: evaluateRows starts");
 		// count the rows solely occupied by the given player
 		playerTotal=0;
@@ -933,7 +933,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
       	trace("evaluateRows: evaluateRows ends (" + playerTotal + ")");
 		return playerTotal;
 	}
-				
+
 
 	/**
 	 *	evaluateCols
@@ -956,9 +956,9 @@ public class Grid implements GridInterface, Cloneable, Comparable
 		Location l;
 		int playerCol, oppCol;
 		int playerTotal;
-		
+
 		assert (p!=null);
-		
+
       	trace("evaluateCols: evaluateCols starts");
 		// count the columns solely occupied by the given player
 		playerTotal=0;
@@ -995,7 +995,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
       	trace("evaluateCols: evaluateCols ends (" + playerTotal + ")");
 		return playerTotal;
 	}
-				
+
 
 	/**
 	 *	evaluateLDiags
@@ -1018,9 +1018,9 @@ public class Grid implements GridInterface, Cloneable, Comparable
 		Location l;
 		int playerDiag, oppDiag;
 		int playerTotal;
-  
+
 		assert (p!=null);
-		
+
       	trace("evaluateLDiags: evaluateLDiags starts");
 		// check if the left diagonal is solely occupied by the given player
 		playerTotal=0;
@@ -1042,7 +1042,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
 					oppDiag++;
 				}
 	  		}
-	  	}		
+	  	}
 		if ((playerDiag > 0) && (oppDiag == 0))
 		{
 			playerTotal++;
@@ -1055,8 +1055,8 @@ public class Grid implements GridInterface, Cloneable, Comparable
       	trace("evaluateLDiags: evaluateLDiags ends (" + playerTotal + ")");
 		return playerTotal;
 	}
-	
-	
+
+
 	/**
 	 *	evaluateRDiags
 	 *	Find the value of right-diagonals in a grid from a
@@ -1078,9 +1078,9 @@ public class Grid implements GridInterface, Cloneable, Comparable
 		Location l;
 		int playerDiag, oppDiag;
 		int playerTotal;
-  
+
 		assert (p!=null);
-		
+
       	trace("evaluateRDiags: evaluateRDiags starts");
 		// check if the right diagonal is solely occupied by the given player
 		playerTotal=0;
@@ -1116,8 +1116,8 @@ public class Grid implements GridInterface, Cloneable, Comparable
       	trace("evaluateRDiags: evaluateRDiags ends (" + playerTotal + ")");
 		return playerTotal;
 	}
-	
-	
+
+
 	/**
 	 *	toString
 	 *	Convert the grid to a String representation.
@@ -1160,7 +1160,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
 			s+="\n";
 		}
 		s+="Worth: " + getWorth() + "\n";
-		
+
       	trace("toString: toString ends");
 		return s;
 	}
@@ -1184,9 +1184,9 @@ public class Grid implements GridInterface, Cloneable, Comparable
 		Graphics g;
 		int width;
 		Square q;
-		
+
 		assert (s!=null);
-		
+
       	trace("showGrid: showGrid starts");
 
 		width=(620-10-((dimension-1)*5)) / dimension;
@@ -1227,7 +1227,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
 
       	trace("showGrid: showGrid ends");
  	}
- 	
+
 	/**
 	 *	compareTo
 	 *	Comparison method for Grid.
@@ -1245,15 +1245,15 @@ public class Grid implements GridInterface, Cloneable, Comparable
  		Location l;
  		int r,c;
  		Grid g;
- 		
+
  		assert (o instanceof Grid);
- 		
+
       	trace("compareTo: compareTo starts");
 
  		g=(Grid) o;
  		d1=getDimension();
  		d2=g.getDimension();
- 		
+
  		if (d1 != d2)
  		{
 			// can't be the same grid -- they're different sizes!
@@ -1288,9 +1288,9 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	      	trace("compareTo: compareTo ends");
 			// didn't find a difference, they must be equal
 			return 0;
-		}			
+		}
  	}
- 	
+
 
 	/**
 	 *	equals
@@ -1306,7 +1306,7 @@ public class Grid implements GridInterface, Cloneable, Comparable
 	public boolean equals(Grid g)
  	{
  		assert (g!=null);
- 		
+
       	trace("equals: equals starts and ends");
 //COMPLETE ME
 		return false;	//CHANGE ME
