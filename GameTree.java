@@ -426,6 +426,7 @@ public class GameTree implements GameTreeInterface
 		Grid g;
 		Square square;
 		Grid newGrid;
+		TNode t;
 
 		assert ((s!=null) && (curr!=null));
 
@@ -439,11 +440,13 @@ public class GameTree implements GameTreeInterface
 
 		for (int i = 1; i <= g.getDimension(); i++) {
 			for (int j = 1; j <= g.getDimension(); j++) {
-				square = g.board[i][j];
+				square = g.board[i-1][j-1];
 				if (!square.isEmpty())
 				{
 					newGrid = (Grid) g.clone();
 					newGrid.occupySquare(new Location(i, j), curr.getSymbol());
+					t = new TNode(newGrid, this.getLevel() + 1);
+					s.push(t);
 				}
 			}
 		}
