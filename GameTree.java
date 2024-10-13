@@ -65,7 +65,7 @@ public class GameTree implements GameTreeInterface
 	{
 		trace("GameTree: constructor starts");
 
-		root=new TNode(o,l);
+		this.root = new TNode(o,l);
 
 		trace("GameTree: constructor ends");
 	}
@@ -85,7 +85,7 @@ public class GameTree implements GameTreeInterface
 	{
 		trace("isEmpty: isEmpty starts and ends");
 
-		return (root == null);
+		return (this.root == null);
 	}
 
 
@@ -112,7 +112,9 @@ public class GameTree implements GameTreeInterface
 
 		trace("getData: getData ends");
 
-		return this.root.getData();	//CHANGE ME
+		Object d = this.root.getData();
+
+		return d;
 	}
 
 
@@ -130,7 +132,7 @@ public class GameTree implements GameTreeInterface
 	{
 		trace("getRandomness: getRandomness starts and ends");
 
-		return moveRandomly;	//CHANGE ME
+		return moveRandomly;
 }
 
 
@@ -148,7 +150,7 @@ public class GameTree implements GameTreeInterface
 	{
 		trace("getSymmetries: getSymmetries starts and ends");
 
-		return symmetryAllowed;	//CHANGE ME
+		return symmetryAllowed;
 }
 
 
@@ -165,6 +167,7 @@ public class GameTree implements GameTreeInterface
 	*/
 	public int getLevel() throws EmptyGameTreeException
 	{
+		int level;
 		trace("getLevel: getLevel starts");
 
 		if (isEmpty())
@@ -174,8 +177,10 @@ public class GameTree implements GameTreeInterface
 		}
 
 		trace("getLevel: getLevel ends");
-//COMPLETE ME
-		return 0;	//CHANGE ME
+
+		level = this.root.level;
+
+		return level;
 	}
 
 
@@ -237,10 +242,11 @@ public class GameTree implements GameTreeInterface
   		}
 
 		// need to create a game tree to hold the answer
-//COMPLETE ME
+		r = new GameTree();
+		r.root = root.getSibling();
 
 		trace("getSibling: getSibling ends");
-		return null;	//CHANGE ME
+		return r;
 	}
 
 
@@ -266,7 +272,7 @@ public class GameTree implements GameTreeInterface
 			throw new EmptyGameTreeException();
 		}
 
-//COMPLETE ME
+		this.root.setData(o);
 		trace("setData: setData ends");
 	}
 
@@ -286,7 +292,8 @@ public class GameTree implements GameTreeInterface
 	{
 		trace("setRandomness: setRandomness starts");
 
-//COMPLETE ME
+		GameTree.moveRandomly = r;
+
 		trace("setRandomness: setRandomness ends");
 	}
 
@@ -306,7 +313,8 @@ public class GameTree implements GameTreeInterface
 	{
 		trace("setSymmetries: setSymmetries starts");
 
-//COMPLETE ME
+		GameTree.symmetryAllowed = s;
+
 		trace("setSymmetries: setSymmetries ends");
 	}
 
@@ -333,7 +341,7 @@ public class GameTree implements GameTreeInterface
 			throw new EmptyGameTreeException();
   		}
 
-//COMPLETE ME
+		this.root.level = l;
 
 		trace("setLevel: setLevel ends");
 	}
@@ -362,7 +370,6 @@ public class GameTree implements GameTreeInterface
   		}
 
 		root.setChild(t.root);
-
 		trace("setChild: setChild ends");
 	}
 
@@ -389,7 +396,7 @@ public class GameTree implements GameTreeInterface
 			throw new EmptyGameTreeException();
 		}
 
-//COMPLETE ME
+		root.setSibling(t.root);
 		trace("setSibling: setSibling ends");
 	}
 
@@ -416,12 +423,15 @@ public class GameTree implements GameTreeInterface
 	*/
 	public void generateLevelDF(Stack s,Player curr)
 	{
+		int currentLevel;
 
 		assert ((s!=null) && (curr!=null));
 
 		trace("generateLevelDF: generateLevelDF starts");
 
 //COMPLETE ME
+		currentLevel = this.getLevel();
+		// up to here on 13/10 19:30
 
 		trace("generateLevelDF: generateLevelDF ends");
 	}
