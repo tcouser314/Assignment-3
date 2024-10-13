@@ -530,7 +530,7 @@ public class Grid implements GridInterface, Cloneable
       	trace("gameOver: gameOver starts");
 
 //COMPLETE ME
-		if (win() != new Symbol() || draw())
+		if (draw() || !win().isEmpty())
 		{
 			res = true;
 		}

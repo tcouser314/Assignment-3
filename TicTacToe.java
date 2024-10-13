@@ -502,6 +502,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 				// game not over, so work out what move to make based on location of mouse click
 				trace("mouseReleased: column " + c + " chosen");
 				trace("mouseReleased: trying row " + r);
+				System.out.println("\n\n\n\n\n\n\n\n\n\ntest\n\n\n\n\n\n\n\n\n\n");
 				l=new Location(r,c);
 				if ((y>75) && (board.validMove(l)))
 				{
@@ -532,6 +533,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 					{
 						// but the square was occupied
 						trace("mouseReleased: the square was taken");
+
 						getGraphics().drawString("Square is taken!",10,695);
 					}
 				}
