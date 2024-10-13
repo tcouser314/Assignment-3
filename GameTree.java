@@ -423,16 +423,30 @@ public class GameTree implements GameTreeInterface
 	*/
 	public void generateLevelDF(Stack s,Player curr)
 	{
-		int currentLevel;
+		Grid g;
+		Square square;
+		Grid newGrid;
 
 		assert ((s!=null) && (curr!=null));
 
 		trace("generateLevelDF: generateLevelDF starts");
 
 //COMPLETE ME
-		currentLevel = this.getLevel();
 		// up to here on 13/10 19:30
+		// opp = ((currentLevel + 1)  % 2 == 0);
 
+		g = (Grid) this.getData();
+
+		for (int i = 1; i <= g.getDimension(); i++) {
+			for (int j = 1; j <= g.getDimension(); j++) {
+				square = g.board[i][j];
+				if (!square.isEmpty())
+				{
+					newGrid = (Grid) g.clone();
+					newGrid.occupySquare(new Location(i, j), curr.getSymbol());
+				}
+			}
+		}
 		trace("generateLevelDF: generateLevelDF ends");
 	}
 
@@ -471,6 +485,7 @@ public class GameTree implements GameTreeInterface
 		trace("buildGameDF: buildGameDF starts");
 
 //COMPLETE ME
+
 
 		trace("buildGameDF: buildGameDF ends");
 	}

@@ -456,7 +456,6 @@ public class Grid implements GridInterface, Cloneable
 		int c;
 		boolean isValid;
 
-
 		assert (l!=null);
 
       	trace("validMove: validMove starts");
