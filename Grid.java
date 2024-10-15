@@ -363,17 +363,27 @@ public class Grid implements GridInterface, Cloneable
 	{
 		Square q;
 		int r, c;
+		Square currentSquare;
+		Symbol empty;
 
 		assert ((l!=null) && (s!=null));
 
       	trace("occupySquare: occupySquare starts");
 
 //COMPLETE ME
-		q = new Square(l, s);
+		empty = new Symbol();
+		currentSquare = getSquare(l);
 		r = l.getRow();
 		c = l.getColumn();
 
+		if (currentSquare.getSymbol().equals(empty))
+		{
+			q = new Square(l, s);
 		board[r-1][c-1] = q;
+		}
+
+
+
 
       	trace("occupySquare: occupySquare ends");
 	}
