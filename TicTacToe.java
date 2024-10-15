@@ -502,7 +502,6 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 				// game not over, so work out what move to make based on location of mouse click
 				trace("mouseReleased: column " + c + " chosen");
 				trace("mouseReleased: trying row " + r);
-				System.out.println("\n\n\n\n\n\n\n\n\n\ntest\n\n\n\n\n\n\n\n\n\n");
 				l=new Location(r,c);
 				if ((y>75) && (board.validMove(l)))
 				{

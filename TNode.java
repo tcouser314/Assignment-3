@@ -4,14 +4,14 @@
  *
  *	@author Julian Dermoudy
  *	@version September 2024
- *	
+ *
  *	This file holds the Tree Node ADT which represents
  *	the nodes in a doubly-linked general tree.  Tree
  *	nodes consist of a "data" field, a level number
  *	("level"), and two references to other nodes
  *	(these being the child node ("child") and the
  *	eldest sibling node	("sibling").
- *	
+ *
  *	This file is complete.
 */
 
@@ -19,7 +19,7 @@
 public class TNode implements TNodeInterface
 {
 	//finals
-	protected final boolean TRACING=true;				// do we want to see trace output?
+	protected final boolean TRACING=false;				// do we want to see trace output?
 
 	// properties
 	protected Object data;		// the value stored in the node
@@ -75,8 +75,8 @@ public class TNode implements TNodeInterface
 
       	trace("setData: setData ends");
 	}
-	
-	
+
+
 	/**
 	 *	setLevel
 	 *	Set method for "level" instance variable.
@@ -96,8 +96,8 @@ public class TNode implements TNodeInterface
 
       	trace("setLevel: setLevel ends");
 	}
-	
-	
+
+
 	/**
 	 *	setChild
 	 *	Set method for "child" instance variable.
@@ -117,8 +117,8 @@ public class TNode implements TNodeInterface
 
       	trace("setChild: setChild ends");
 	}
-	
-	
+
+
 	/**
 	 *	setSibling
 	 *	Set method for "sibling" instance variable.
@@ -138,8 +138,8 @@ public class TNode implements TNodeInterface
 
       	trace("setSibling: setSibling ends");
 	}
-	
-	
+
+
 	/**
 	 *	getData
 	 *	Get method for "data" instance variable.
@@ -156,8 +156,8 @@ public class TNode implements TNodeInterface
 
 		return data;
 	}
-	
-	
+
+
 	/**
 	 *	getLevel
 	 *	Get method for "level" instance variable.
@@ -175,8 +175,8 @@ public class TNode implements TNodeInterface
 
 		return level;
 	}
-	
-	
+
+
 	/**
 	 *	getChild
 	 *	Get method for "child" instance variable.
@@ -194,8 +194,8 @@ public class TNode implements TNodeInterface
 
 		return child;
 	}
-	
-	
+
+
 	/**
 	 *	getSibling
 	 *	Get method for "sibling" instance variable.

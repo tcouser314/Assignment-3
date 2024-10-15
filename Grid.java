@@ -20,7 +20,7 @@ import java.awt.*;
 public class Grid implements GridInterface, Cloneable
 {
 	//finals
-	protected final boolean TRACING=true;	// do we want to see trace output?
+	protected final boolean TRACING=false;	// do we want to see trace output?
 
 	// properties
 	protected int dimension;			// size of the grid
