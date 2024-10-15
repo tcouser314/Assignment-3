@@ -427,29 +427,46 @@ public class GameTree implements GameTreeInterface
 		Square square;
 		Grid newGrid;
 		TNode t;
+		Node n;
 
 		assert ((s!=null) && (curr!=null));
 
 		trace("generateLevelDF: generateLevelDF starts");
 
 //COMPLETE ME
-		// up to here on 13/10 19:30
-		// opp = ((currentLevel + 1)  % 2 == 0);
 
-		g = (Grid) this.getData();
+		findMove();
+
+		t = this.root;
+		g = (Grid) t.getData();
 
 		for (int i = 1; i <= g.getDimension(); i++) {
 			for (int j = 1; j <= g.getDimension(); j++) {
 				square = g.board[i-1][j-1];
-				if (!square.isEmpty())
-				{
+				if (square.isEmpty() && !g.gameOver()) {
 					newGrid = (Grid) g.clone();
-					newGrid.occupySquare(new Location(i, j), curr.getSymbol());
+					newGrid.occupySquare(new Location(i, j), curr.opponent().getSymbol());
 					t = new TNode(newGrid, this.getLevel() + 1);
+					// n = new Node(getChild());
 					s.push(t);
 				}
 			}
 		}
+
+		// g = (Grid) this.getData();
+
+		// for (int i = 1; i <= g.getDimension(); i++) {
+		// 	for (int j = 1; j <= g.getDimension(); j++) {
+		// 		square = g.board[i-1][j-1];
+		// 		if (!square.isEmpty())
+		// 		{
+		// 			newGrid = (Grid) g.clone();
+		// 			newGrid.occupySquare(new Location(i, j), curr.getSymbol());
+		// 			t = new TNode(newGrid, this.getLevel() + 1);
+		// 			s.push(t);
+		// 		}
+		// 	}
+		// }
 		trace("generateLevelDF: generateLevelDF ends");
 	}
 
@@ -482,13 +499,26 @@ public class GameTree implements GameTreeInterface
 	public void buildGameDF(Stack s, Player curr, int d)
 	{
 		GameTree t;
+		TNode n;
+		Grid g;
+		int score;
+		int topScore = Integer.MIN_VALUE;
 
 		assert ((!isEmpty()) && (s!=null) && (curr!=null) && (d>0));
 
 		trace("buildGameDF: buildGameDF starts");
 
-//COMPLETE ME
+		this.root.setLevel(0);	// set the level of the root node to 0
 
+		while (!s.isEmpty()) {
+			n = (TNode) s.top();
+			g = (Grid) n.getData();
+			score = g.evaluateGrid(curr.opponent());
+			this.generateLevelDF(s, curr);
+			if (score > topScore) {
+				topScore = score;
+			}
+		}
 
 		trace("buildGameDF: buildGameDF ends");
 	}
