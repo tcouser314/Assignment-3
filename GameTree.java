@@ -434,29 +434,35 @@ public class GameTree implements GameTreeInterface
 
 		Grid currentGrid = (Grid) root.getData();
 		Symbol empty = new Symbol();
+		System.out.println("Generating level " + getLevel());;
 
 		if (!currentGrid.gameOver()) {
+			int num = 1;
 			int dimension = currentGrid.getDimension();
 			for (int i = 1; i <= dimension; i++) {
 				for (int j = 1; j <= dimension; j++) {
 					Location l = new Location(i, j);
+
 					if (currentGrid.getSymbol(l).equals(empty)) {
+
 						Grid newGrid = (Grid) currentGrid.clone();
 						newGrid.occupySquare(l, curr.opponent().getSymbol());
 						Square testSquare = newGrid.getSquare(l);
-						System.out.println("testSquare: " + testSquare.toString());
-						currentGrid = newGrid;
+						// System.out.println("testSquare: " + testSquare.toString());
+
 						GameTree newTree = new GameTree(newGrid, getLevel() + 1);
 						TNode newTNode = new TNode(newGrid, getLevel() + 1);
+
+						System.out.println("Option " + num + newTree.toString());
+						num ++;
 						if (root.getChild() == null) {
 							root.setChild(newTNode);
-							System.out.println("child set");
 						}
 						else {
 							root.setSibling(newTNode);
-							System.out.println("sibling set");
 						}
 						s.push(newTree);
+
 					}
 				}
 			}
@@ -464,11 +470,6 @@ public class GameTree implements GameTreeInterface
 		}
 
 		trace("generateLevelDF: generateLevelDF ends");
-		System.out.println("\n\n\n\nlevel " + getLevel());
-		System.out.println("root " + root.getData());
-		System.out.println("root child " + root.getChild().getData());
-		System.out.println("root sibling " + root.getSibling().getData());
-
 	}
 
 
