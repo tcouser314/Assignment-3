@@ -434,7 +434,7 @@ public class GameTree implements GameTreeInterface
 
 		Grid currentGrid = (Grid) root.getData();
 		Symbol empty = new Symbol();
-		System.out.println("Generating level " + getLevel());;
+		System.out.println("Generating level " + (getLevel() + 1));;
 
 		if (!currentGrid.gameOver()) {
 			int num = 1;
@@ -462,13 +462,12 @@ public class GameTree implements GameTreeInterface
 							root.setSibling(newTNode);
 						}
 						s.push(newTree);
-
+						traverse();
 					}
 				}
 			}
 			this.setLevel(getLevel() + 1);
 		}
-
 		trace("generateLevelDF: generateLevelDF ends");
 	}
 
@@ -514,10 +513,18 @@ public class GameTree implements GameTreeInterface
 			generateLevelDF(s, curr);
 			if (!s.isEmpty())
 			{
-			t = (GameTree) s.top();
+				t = (GameTree) s.top();
+				s.pop();
 			}
-			buildGameDF(s, curr, d);
+			curr = curr.opponent();
+			// if (this.root.getChild() != null) {
+			// 	this.root = this.root.getChild();
+			// }
+			// else {
+			// 	this.root = this.root.getSibling();
+			// }
 		}
+		System.out.println("\n\n\n\n\nwaiting for next move\n\n\n\n\n");
 
 		trace("buildGameDF: buildGameDF ends");
 	}
