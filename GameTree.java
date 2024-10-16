@@ -450,9 +450,11 @@ public class GameTree implements GameTreeInterface
 						TNode newTNode = new TNode(newGrid, getLevel() + 1);
 						if (root.getChild() == null) {
 							root.setChild(newTNode);
+							System.out.println("child set");
 						}
 						else {
 							root.setSibling(newTNode);
+							System.out.println("sibling set");
 						}
 						s.push(newTree);
 					}
@@ -465,6 +467,8 @@ public class GameTree implements GameTreeInterface
 		System.out.println("\n\n\n\nlevel " + getLevel());
 		System.out.println("root " + root.getData());
 		System.out.println("root child " + root.getChild().getData());
+		System.out.println("root sibling " + root.getSibling().getData());
+
 	}
 
 
