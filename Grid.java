@@ -171,7 +171,6 @@ public class Grid implements GridInterface, Cloneable
 		{
 			for (c=1; c<=dimension; c++)
 			{
-				// up to here after Saturday night 12/10
 				l=new Location(r,c);
 				try
 				{

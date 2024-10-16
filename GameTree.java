@@ -401,6 +401,7 @@ public class GameTree implements GameTreeInterface
 	}
 
 
+
 	/**
 	 *	generateLevelDF
 	 *	Generate the next level of the tree
@@ -420,54 +421,50 @@ public class GameTree implements GameTreeInterface
 	 *
 	 *	@param s Stack of reachable but unexpanded game trees
 	 *	@param curr current Player
+	 *
+	 * Instructions for generateLevelDF: if game not over and square not occupied, clone the grid, occupy the square, evaluate the grid, create a new tree, link it to the current tree as a child or sibling, push the new tree onto the stack
 	*/
 	public void generateLevelDF(Stack s,Player curr)
 	{
-		Grid g;
-		Square square;
-		Grid newGrid;
-		TNode t;
-		Node n;
-
 		assert ((s!=null) && (curr!=null));
 
 		trace("generateLevelDF: generateLevelDF starts");
 
 //COMPLETE ME
 
-		findMove();
+		Grid currentGrid = (Grid) root.getData();
+		Symbol empty = new Symbol();
 
-		t = this.root;
-		g = (Grid) t.getData();
-
-		for (int i = 1; i <= g.getDimension(); i++) {
-			for (int j = 1; j <= g.getDimension(); j++) {
-				square = g.board[i-1][j-1];
-				if (square.isEmpty() && !g.gameOver()) {
-					newGrid = (Grid) g.clone();
-					newGrid.occupySquare(new Location(i, j), curr.opponent().getSymbol());
-					t = new TNode(newGrid, this.getLevel() + 1);
-					// n = new Node(getChild());
-					s.push(t);
+		if (!currentGrid.gameOver()) {
+			int dimension = currentGrid.getDimension();
+			for (int i = 1; i <= dimension; i++) {
+				for (int j = 1; j <= dimension; j++) {
+					Location l = new Location(i, j);
+					if (currentGrid.getSymbol(l).equals(empty)) {
+						Grid newGrid = (Grid) currentGrid.clone();
+						newGrid.occupySquare(l, curr.opponent().getSymbol());
+						Square testSquare = newGrid.getSquare(l);
+						System.out.println("testSquare: " + testSquare.toString());
+						currentGrid = newGrid;
+						GameTree newTree = new GameTree(newGrid, getLevel() + 1);
+						TNode newTNode = new TNode(newGrid, getLevel() + 1);
+						if (root.getChild() == null) {
+							root.setChild(newTNode);
+						}
+						else {
+							root.setSibling(newTNode);
+						}
+						s.push(newTree);
+					}
 				}
 			}
+			this.setLevel(getLevel() + 1);
 		}
 
-		// g = (Grid) this.getData();
-
-		// for (int i = 1; i <= g.getDimension(); i++) {
-		// 	for (int j = 1; j <= g.getDimension(); j++) {
-		// 		square = g.board[i-1][j-1];
-		// 		if (!square.isEmpty())
-		// 		{
-		// 			newGrid = (Grid) g.clone();
-		// 			newGrid.occupySquare(new Location(i, j), curr.getSymbol());
-		// 			t = new TNode(newGrid, this.getLevel() + 1);
-		// 			s.push(t);
-		// 		}
-		// 	}
-		// }
 		trace("generateLevelDF: generateLevelDF ends");
+		System.out.println("\n\n\n\nlevel " + getLevel());
+		System.out.println("root " + root.getData());
+		System.out.println("root child " + root.getChild().getData());
 	}
 
 
@@ -495,29 +492,26 @@ public class GameTree implements GameTreeInterface
 	 *	@param s Stack of reachable but unexpanded game trees
 	 *	@param curr current Player
 	 *	@param d desired depth (number of moves ahead) that game tree should be built to
+	 *
+	 * Instructions for buildGameDF: while the game tree is not deep enough, generate the next level of the tree. If the stack is not empty, pop the top tree from the stack and repeat the process
 	*/
 	public void buildGameDF(Stack s, Player curr, int d)
 	{
 		GameTree t;
-		TNode n;
-		Grid g;
-		int score;
-		int topScore = Integer.MIN_VALUE;
+		Node n;
 
 		assert ((!isEmpty()) && (s!=null) && (curr!=null) && (d>0));
 
 		trace("buildGameDF: buildGameDF starts");
 
-		this.root.setLevel(0);	// set the level of the root node to 0
-
-		while (!s.isEmpty()) {
-			n = (TNode) s.top();
-			g = (Grid) n.getData();
-			score = g.evaluateGrid(curr.opponent());
-			this.generateLevelDF(s, curr);
-			if (score > topScore) {
-				topScore = score;
+		while (getLevel() < d)
+		{
+			generateLevelDF(s, curr);
+			if (!s.isEmpty())
+			{
+			t = (GameTree) s.top();
 			}
+			buildGameDF(s, curr, d);
 		}
 
 		trace("buildGameDF: buildGameDF ends");
