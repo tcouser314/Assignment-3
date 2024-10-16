@@ -21,7 +21,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 {
 	// finals
 	protected final boolean TRACING=false;			// do we want to see trace output?
-	protected final boolean HUMAN_VS_COMPUTER=false;	// is the user player against the computer?  CHANGE THIS ONCE GAME IS WORKING
+	protected final boolean HUMAN_VS_COMPUTER=true;	// is the user player against the computer?  CHANGE THIS ONCE GAME IS WORKING
 
 	protected final int LOW_DIMENSION=3;			// low value for grid size range
 	protected final int HIGH_DIMENSION=19;			// high value for grid size range
@@ -248,7 +248,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 				        {
 				        	trace("paint: generating the game tree depth-first");
 							s=new Stack();
-		  	      			game.buildGameDF(s,HUMAN,lookAhead);
+		  	      			game.buildGameDF(s,HUMAN,2);
 		  	      		}
 		  	      		else
 		  	      		{
