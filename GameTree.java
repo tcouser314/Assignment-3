@@ -434,7 +434,8 @@ public class GameTree implements GameTreeInterface
 
 		Grid currentGrid = (Grid) root.getData();
 		Symbol empty = new Symbol();
-		System.out.println("Generating level " + (getLevel() + 1));;
+		System.out.println("Generating level " + (getLevel() + 1));
+		Grid bestGrid = currentGrid;
 
 		if (!currentGrid.gameOver()) {
 			int num = 1;
@@ -447,11 +448,15 @@ public class GameTree implements GameTreeInterface
 
 						Grid newGrid = (Grid) currentGrid.clone();
 						newGrid.occupySquare(l, curr.opponent().getSymbol());
-						Square testSquare = newGrid.getSquare(l);
+						// Square testSquare = newGrid.getSquare(l);
 						// System.out.println("testSquare: " + testSquare.toString());
+						int score = newGrid.evaluateGrid(curr.opponent());
+						System.out.println("Worth of Grid: " + score);
 
 						GameTree newTree = new GameTree(newGrid, getLevel() + 1);
 						TNode newTNode = new TNode(newGrid, getLevel() + 1);
+
+						bestGrid = newGrid;
 
 						System.out.println("Option " + num + newTree.toString());
 						num ++;
@@ -468,6 +473,9 @@ public class GameTree implements GameTreeInterface
 			}
 			this.setLevel(getLevel() + 1);
 		}
+		// System.out.println("\n\n\n\n\nBest grid: " + bestGrid.toString());
+		// this.root.setData(bestGrid);
+		// currentGrid = bestGrid;
 		trace("generateLevelDF: generateLevelDF ends");
 	}
 
