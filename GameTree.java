@@ -432,94 +432,37 @@ public class GameTree implements GameTreeInterface
 
 //COMPLETE ME
 
-		TNode t = this.root;
-		Grid g = (Grid) t.getData();
-		System.out.println(g.toString());
-		Symbol empty = new Symbol();
-		System.out.println("Generating level " + (getLevel() + 1));
+	TNode t = this.root;
+    Grid g = (Grid) t.getData();
+    //System.out.println(g.toString());
+    Symbol empty = new Symbol();
 
-		int dimension = g.getDimension();
-		for (int i = 1; i <= dimension; i++) {
-			for (int j = 1; j <= dimension; j++) {
-				Location l = new Location(i, j);
-				if (g.getSymbol(l).equals(empty)) {
-					Grid newGrid = (Grid) g.clone();
+    //System.out.println("Generating level " + (getLevel() + 1));
 
-					newGrid.occupySquare(l, curr.opponent().getSymbol());
+    int dimension = g.getDimension();
+    for (int i = 1; i <= dimension; i++) {
+        for (int j = 1; j <= dimension; j++) {
+            Location l = new Location(i, j);
+            if (g.getSymbol(l).equals(empty) && !g.gameOver()) {
+                Grid newGrid = (Grid) g.clone();
+                newGrid.occupySquare(l, curr.opponent().getSymbol());
 
-					//GameTree newTree = new GameTree(newGrid, getLevel() + 1);
-					//System.out.println("New grid: " + newGrid.toString());
-					if (this.root.getChild() == null) {
-						this.root.setChild(new TNode(newGrid, getLevel() + 1));
-						Grid testGrid = (Grid) this.root.getChild().getData();
-						System.out.println("test grid (child): " + testGrid.toString());
-					}
-					else {
-						this.root.getChild().setSibling(new TNode(newGrid, getLevel() + 1));
-						Grid testGrid = (Grid) this.root.getChild().getSibling().getData();
-						System.out.println("test grid (sibling): " + testGrid.toString());
-						System.out.println("Added sibling");
-					}
-				}
-			}
-		}
-
-
-		// Grid currentGrid = (Grid) root.getData();
-		// Symbol empty = new Symbol();
-		// System.out.println("Generating level " + (getLevel() + 1));
-		// Grid bestGrid = currentGrid;
-
-		// if (!currentGrid.gameOver()) {
-		// 	int num = 1;
-		// 	int dimension = currentGrid.getDimension();
-		// 	for (int i = 1; i <= dimension; i++) {
-		// 		for (int j = 1; j <= dimension; j++) {
-		// 			Location l = new Location(i, j);
-
-		// 			if (currentGrid.getSymbol(l).equals(empty)) {
-
-		// 				Grid newGrid = (Grid) currentGrid.clone();
-		// 				newGrid.occupySquare(l, curr.opponent().getSymbol());
-		// 				// Square testSquare = newGrid.getSquare(l);
-		// 				// System.out.println("testSquare: " + testSquare.toString());
-		// 				int score = newGrid.evaluateGrid(curr.opponent());
-		// 				System.out.println("Worth of Grid: " + score);
-
-		// 				GameTree newTree = new GameTree(newGrid, getLevel() + 1);
-		// 				TNode newTNode = new TNode(newGrid, getLevel() + 1);
-
-		// 				bestGrid = newGrid;
-
-		// 				System.out.println("Option " + num + newTree.toString());
-		// 				num ++;
-		// 				s.push(newTree);
-		// 				if (root.getChild() == null) {
-		// 					root.setChild(newTNode);
-		// 				}
-		// 				else {
-		// 					root.setSibling(newTNode);
-		// 				}
-		// 				if (score > bestGrid.getWorth())
-		// 				{
-		// 					bestGrid = newGrid;
-		// 				}
-		// 				// if (root.getChild() != null) {
-		// 				// 	root = root.getChild();
-		// 				// }
-		// 				// else {
-		// 				// 	if (root.getSibling() != null) {
-		// 				// 		root = root.getSibling();
-		// 				// 	}
-		// 				// }
-		// 		}
-		// 	}
-		// 	this.setLevel(getLevel() + 1);
-		// }
-		// // System.out.println("\n\n\n\n\nBest grid: " + bestGrid.toString());
-		// // this.root.setData(bestGrid);
-		// // currentGrid = bestGrid;
-	//}
+                TNode newTNode = new TNode(newGrid, getLevel() + 1);
+                if (this.root.getChild() == null) {
+                    this.root.setChild(newTNode);
+                } else {
+                    TNode sibling = this.root.getChild();
+                    while (sibling.getSibling() != null) {
+                    sibling = sibling.getSibling();
+                    }
+                    sibling.setSibling(newTNode);
+                }
+				GameTree newTree = new GameTree(newTNode, getLevel() + 1);
+                Node newNode = new Node(newTree);
+                s.push(newNode);
+            }
+        }
+    }
 		trace("generateLevelDF: generateLevelDF ends");
 	}
 
@@ -560,43 +503,37 @@ public class GameTree implements GameTreeInterface
 		assert ((!isEmpty()) && (s!=null) && (curr!=null) && (d>0));
 
 		trace("buildGameDF: buildGameDF starts");
+		// TNode tNode = this.root;
+		// Grid g = (Grid) tNode.getData();
+		System.out.println("\n\n\n\ninitial game tree: " + this.toString()+"\n\n\n\nend of tree");
+
+		generateLevelDF(s, curr);
 
 		while (getLevel() < d) {
-			generateLevelDF(s, curr);
+
+			// GameTree c = getChild();
+			// if (!c.isEmpty()) {
+			// 	c.buildGameDF(s, curr.opponent(), d);
+			// 	this.setChild(c);
+			// }
+			// GameTree sib = getSibling();
+			// if (!s.isEmpty()) {
+			// 	sib.buildGameDF(s, curr, d);
+			// 	this.setSibling(sib);
+			// }
+
+			if (!s.isEmpty())
+			{
+				n = (Node) s.top();
+				s.pop();
+				t = (GameTree) n.getData();
+
+			}
 			this.setLevel(getLevel() + 1);
-			this.root = this.root.getChild();
 			curr = curr.opponent();
 		}
 
-
-		// while (getLevel() < d)
-		// {
-		// 	generateLevelDF(s, curr);
-		// 	// if (this.root.getChild() != null) {
-		// 	// 	this.root = this.root.getChild();
-		// 	// }
-		// 	// else {
-		// 	// 	if (this.root.getSibling() != null) {
-		// 	// 		this.root = this.root.getSibling();
-		// 	// 	}
-		// 	// }
-
-		// 	if (!s.isEmpty())
-		// 	{
-		// 		t = (GameTree) s.top();
-		// 		s.pop();
-		// 		this.root = t.root;
-		// 		// if (t.root.getChild() != null) {
-		// 		// 	this.root = t.root.getChild();
-		// 		// }
-		// 		// else {
-		// 		// 	this.root = t.root.getSibling();
-		// 		// }
-		// 		generateLevelDF(s, curr);
-		// 	}
-		// 	curr = curr.opponent();
-		// }
-		// System.out.println("\n\n\n\n\nwaiting for next move\n\n\n\n\n");
+		System.out.println("\n\n\n\nGame tree: " + this.toString()+"\n\n\n\nend of tree");
 
 		trace("buildGameDF: buildGameDF ends");
 	}
@@ -1118,16 +1055,16 @@ public class GameTree implements GameTreeInterface
 		}
 		else
 		{
-			s+=rootNodeToString();
+			s+="root "+rootNodeToString();
 			c=getChild();
 			if (! c.isEmpty())
 			{
-				s+=c.toString();
+				s+="child "+c.toString();
 			}
 			c=getSibling();
 			if (! c.isEmpty())
 			{
-				s+=c.toString();
+				s+="sibling "+c.toString();
 			}
 		}
 
