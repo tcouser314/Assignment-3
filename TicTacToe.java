@@ -248,7 +248,7 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 				        {
 				        	trace("paint: generating the game tree depth-first");
 							s=new Stack();
-		  	      			game.buildGameDF(s,HUMAN,2);
+		  	      			game.buildGameDF(s,HUMAN,5);
 		  	      		}
 		  	      		else
 		  	      		{
@@ -261,8 +261,11 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 		  	      		trace("paint: game generated, evaluating options");
   						game.traverse();
    						v=game.getChild().chooseBest();
+						System.out.println("paint: options evaluated, best outcome: " + v);
     					trace("paint: options evaluated, best outcome: " + v);
 		        		game.findBest(v);
+						System.out.println(game.getData().toString());
+
 						board = (Grid)game.getData();
 						trace("paint: move selected");
 						myTurn=false;
