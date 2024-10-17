@@ -432,52 +432,97 @@ public class GameTree implements GameTreeInterface
 
 //COMPLETE ME
 
-		Grid currentGrid = (Grid) root.getData();
+		TNode t = this.root;
+		Grid g = (Grid) t.getData();
+		System.out.println(g.toString());
 		Symbol empty = new Symbol();
 		System.out.println("Generating level " + (getLevel() + 1));
-		Grid bestGrid = currentGrid;
 
-		if (!currentGrid.gameOver()) {
-			int num = 1;
-			int dimension = currentGrid.getDimension();
-			for (int i = 1; i <= dimension; i++) {
-				for (int j = 1; j <= dimension; j++) {
-					Location l = new Location(i, j);
+		int dimension = g.getDimension();
+		for (int i = 1; i <= dimension; i++) {
+			for (int j = 1; j <= dimension; j++) {
+				Location l = new Location(i, j);
+				if (g.getSymbol(l).equals(empty)) {
+					Grid newGrid = (Grid) g.clone();
 
-					if (currentGrid.getSymbol(l).equals(empty)) {
+					newGrid.occupySquare(l, curr.opponent().getSymbol());
 
-						Grid newGrid = (Grid) currentGrid.clone();
-						newGrid.occupySquare(l, curr.opponent().getSymbol());
-						// Square testSquare = newGrid.getSquare(l);
-						// System.out.println("testSquare: " + testSquare.toString());
-						int score = newGrid.evaluateGrid(curr.opponent());
-						System.out.println("Worth of Grid: " + score);
-
-						GameTree newTree = new GameTree(newGrid, getLevel() + 1);
-						TNode newTNode = new TNode(newGrid, getLevel() + 1);
-
-						bestGrid = newGrid;
-
-						System.out.println("Option " + num + newTree.toString());
-						num ++;
-						if (root.getChild() == null) {
-							root.setChild(newTNode);
-						}
-						else {
-							root.setSibling(newTNode);
-						}
-						s.push(newTree);
-						traverse();
+					//GameTree newTree = new GameTree(newGrid, getLevel() + 1);
+					//System.out.println("New grid: " + newGrid.toString());
+					if (this.root.getChild() == null) {
+						this.root.setChild(new TNode(newGrid, getLevel() + 1));
+						Grid testGrid = (Grid) this.root.getChild().getData();
+						System.out.println("test grid (child): " + testGrid.toString());
+					}
+					else {
+						this.root.getChild().setSibling(new TNode(newGrid, getLevel() + 1));
+						Grid testGrid = (Grid) this.root.getChild().getSibling().getData();
+						System.out.println("test grid (sibling): " + testGrid.toString());
+						System.out.println("Added sibling");
 					}
 				}
 			}
-			this.setLevel(getLevel() + 1);
 		}
-		// System.out.println("\n\n\n\n\nBest grid: " + bestGrid.toString());
-		// this.root.setData(bestGrid);
-		// currentGrid = bestGrid;
+
+
+		// Grid currentGrid = (Grid) root.getData();
+		// Symbol empty = new Symbol();
+		// System.out.println("Generating level " + (getLevel() + 1));
+		// Grid bestGrid = currentGrid;
+
+		// if (!currentGrid.gameOver()) {
+		// 	int num = 1;
+		// 	int dimension = currentGrid.getDimension();
+		// 	for (int i = 1; i <= dimension; i++) {
+		// 		for (int j = 1; j <= dimension; j++) {
+		// 			Location l = new Location(i, j);
+
+		// 			if (currentGrid.getSymbol(l).equals(empty)) {
+
+		// 				Grid newGrid = (Grid) currentGrid.clone();
+		// 				newGrid.occupySquare(l, curr.opponent().getSymbol());
+		// 				// Square testSquare = newGrid.getSquare(l);
+		// 				// System.out.println("testSquare: " + testSquare.toString());
+		// 				int score = newGrid.evaluateGrid(curr.opponent());
+		// 				System.out.println("Worth of Grid: " + score);
+
+		// 				GameTree newTree = new GameTree(newGrid, getLevel() + 1);
+		// 				TNode newTNode = new TNode(newGrid, getLevel() + 1);
+
+		// 				bestGrid = newGrid;
+
+		// 				System.out.println("Option " + num + newTree.toString());
+		// 				num ++;
+		// 				s.push(newTree);
+		// 				if (root.getChild() == null) {
+		// 					root.setChild(newTNode);
+		// 				}
+		// 				else {
+		// 					root.setSibling(newTNode);
+		// 				}
+		// 				if (score > bestGrid.getWorth())
+		// 				{
+		// 					bestGrid = newGrid;
+		// 				}
+		// 				// if (root.getChild() != null) {
+		// 				// 	root = root.getChild();
+		// 				// }
+		// 				// else {
+		// 				// 	if (root.getSibling() != null) {
+		// 				// 		root = root.getSibling();
+		// 				// 	}
+		// 				// }
+		// 		}
+		// 	}
+		// 	this.setLevel(getLevel() + 1);
+		// }
+		// // System.out.println("\n\n\n\n\nBest grid: " + bestGrid.toString());
+		// // this.root.setData(bestGrid);
+		// // currentGrid = bestGrid;
+	//}
 		trace("generateLevelDF: generateLevelDF ends");
 	}
+
 
 
 	/**
@@ -516,23 +561,42 @@ public class GameTree implements GameTreeInterface
 
 		trace("buildGameDF: buildGameDF starts");
 
-		while (getLevel() < d)
-		{
+		while (getLevel() < d) {
 			generateLevelDF(s, curr);
-			if (!s.isEmpty())
-			{
-				t = (GameTree) s.top();
-				s.pop();
-			}
+			this.setLevel(getLevel() + 1);
+			this.root = this.root.getChild();
 			curr = curr.opponent();
-			// if (this.root.getChild() != null) {
-			// 	this.root = this.root.getChild();
-			// }
-			// else {
-			// 	this.root = this.root.getSibling();
-			// }
 		}
-		System.out.println("\n\n\n\n\nwaiting for next move\n\n\n\n\n");
+
+
+		// while (getLevel() < d)
+		// {
+		// 	generateLevelDF(s, curr);
+		// 	// if (this.root.getChild() != null) {
+		// 	// 	this.root = this.root.getChild();
+		// 	// }
+		// 	// else {
+		// 	// 	if (this.root.getSibling() != null) {
+		// 	// 		this.root = this.root.getSibling();
+		// 	// 	}
+		// 	// }
+
+		// 	if (!s.isEmpty())
+		// 	{
+		// 		t = (GameTree) s.top();
+		// 		s.pop();
+		// 		this.root = t.root;
+		// 		// if (t.root.getChild() != null) {
+		// 		// 	this.root = t.root.getChild();
+		// 		// }
+		// 		// else {
+		// 		// 	this.root = t.root.getSibling();
+		// 		// }
+		// 		generateLevelDF(s, curr);
+		// 	}
+		// 	curr = curr.opponent();
+		// }
+		// System.out.println("\n\n\n\n\nwaiting for next move\n\n\n\n\n");
 
 		trace("buildGameDF: buildGameDF ends");
 	}
