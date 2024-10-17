@@ -505,9 +505,17 @@ public class GameTree implements GameTreeInterface
 		trace("buildGameDF: buildGameDF starts");
 		// TNode tNode = this.root;
 		// Grid g = (Grid) tNode.getData();
-		System.out.println("\n\n\n\ninitial game tree: " + this.toString()+"\n\n\n\nend of tree");
 
 		generateLevelDF(s, curr);
+
+		if (this.root.getChild() != null) {
+			System.out.println("Has a child");
+		}
+		TNode sibling = this.root.getChild();
+		while (sibling.getSibling() != null) {
+			System.out.println("Child has a sibling");
+			sibling = sibling.getSibling();
+		}
 
 		while (getLevel() < d) {
 
@@ -1055,16 +1063,16 @@ public class GameTree implements GameTreeInterface
 		}
 		else
 		{
-			s+="root "+rootNodeToString();
+			s+=rootNodeToString();
 			c=getChild();
 			if (! c.isEmpty())
 			{
-				s+="child "+c.toString();
+				s+="\nchild"+c.toString();
 			}
 			c=getSibling();
 			if (! c.isEmpty())
 			{
-				s+="sibling "+c.toString();
+				s+="\nsibling"+c.toString();
 			}
 		}
 
