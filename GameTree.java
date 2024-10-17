@@ -437,8 +437,6 @@ public class GameTree implements GameTreeInterface
     //System.out.println(g.toString());
     Symbol empty = new Symbol();
 
-    //System.out.println("Generating level " + (getLevel() + 1));
-
     int dimension = g.getDimension();
     for (int i = 1; i <= dimension; i++) {
         for (int j = 1; j <= dimension; j++) {
@@ -458,8 +456,8 @@ public class GameTree implements GameTreeInterface
                     sibling.setSibling(newTNode);
                 }
 				GameTree newTree = new GameTree(newTNode, getLevel() + 1);
-                //Node newNode = new Node(newTree);
-                s.push(newTree);
+                Node newNode = new Node(newTree);
+                s.push(newNode);
             }
         }
     }
@@ -519,11 +517,9 @@ public class GameTree implements GameTreeInterface
 
 			while (!s.isEmpty())
 			{
-				// n = (Node) s.top();
-				t = (GameTree) s.top();
+				n = (Node) s.top();
+				t = (GameTree) n.getData();
 				s.pop();
-				//t = (GameTree) n.getData();
-				//System.out.println(s.toString());
 			}
 			this.setLevel(getLevel() + 1);
 			curr = curr.opponent();
