@@ -430,40 +430,40 @@ public class GameTree implements GameTreeInterface
 
 		trace("generateLevelDF: generateLevelDF starts");
 
-//COMPLETE ME
+		TNode rootTNode = this.root;
+		Grid rootGrid = (Grid) rootTNode.getData();
+		//System.out.println("root: "+rootGrid.toString());
+		Symbol empty = new Symbol();
 
-	TNode t = this.root;
-    Grid g = (Grid) t.getData();
-    //System.out.println(g.toString());
-    Symbol empty = new Symbol();
+		int dimension = rootGrid.getDimension();
+		if (!rootGrid.gameOver()) {
+		for (int i = 1; i <= dimension; i++) {
+			for (int j = 1; j <= dimension; j++) {
+				Location newLocation = new Location(i, j);
+				if (rootGrid.getSymbol(newLocation).equals(empty)) {
+					Grid newGrid = (Grid) rootGrid.clone();
+					newGrid.occupySquare(newLocation, curr.getSymbol());
+					newGrid.setWorth(newGrid.evaluateGrid(curr.opponent()));
+					GameTree newTree = new GameTree(newGrid, rootTNode.getLevel() + 1);
 
-    int dimension = g.getDimension();
-    for (int i = 1; i <= dimension; i++) {
-        for (int j = 1; j <= dimension; j++) {
-            Location l = new Location(i, j);
-            if (g.getSymbol(l).equals(empty) && !g.gameOver()) {
-                Grid newGrid = (Grid) g.clone();
-                newGrid.occupySquare(l, curr.opponent().getSymbol());
+					if (this.getChild().isEmpty()) {
+						this.setChild(newTree);
+					}
+					else {
+						GameTree siblingTree = this.getChild();
+						while (!siblingTree.getSibling().isEmpty()) {
+							siblingTree = siblingTree.getSibling();
+						}
+						siblingTree.setSibling(newTree);
+					}
+					s.push(newTree);
+				}
+			}
+		}
+		}
+		System.out.println("Final tree: "+this.toString());
 
-                TNode newTNode = new TNode(newGrid, getLevel() + 1);
-                if (this.root.getChild() == null) {
-                    this.root.setChild(newTNode);
-					System.out.println("Set child: " + newTNode.getData().toString());
-                } else {
-                    TNode sibling = this.root.getChild();
-                    while (sibling.getSibling() != null) {
-                    sibling = sibling.getSibling();
-                    }
-                    sibling.setSibling(newTNode);
-					System.out.println("Set sibling: " + newTNode.getData().toString());
-                }
-				GameTree newTree = new GameTree(newTNode, getLevel() + 1);
-                Node newNode = new Node(newTree);
-                s.push(newNode);
-            }
-        }
-    }
-		trace("generateLevelDF: generateLevelDF ends");
+	trace("generateLevelDF: generateLevelDF ends");
 	}
 
 
@@ -504,28 +504,22 @@ public class GameTree implements GameTreeInterface
 
 		trace("buildGameDF: buildGameDF starts");
 
-		generateLevelDF(s, curr);
+		// System.out.println("Data type of root: "+this.root.getData().getClass().getName());
 
-		if (this.root.getChild() != null) {
-			System.out.println("Has a child");
-		}
-		TNode sibling = this.root.getChild();
-		while (sibling.getSibling() != null) {
-			System.out.println("Child has a sibling");
-			sibling = sibling.getSibling();
-		}
 
-		while (getLevel() < d) {
+		generateLevelDF(s, curr.opponent());
+		// while (getLevel() < d) {
 
-			while (!s.isEmpty())
-			{
-				n = (Node) s.top();
-				t = (GameTree) n.getData();
-				s.pop();
-			}
-			this.setLevel(getLevel() + 1);
-			curr = curr.opponent();
-		}
+		// 	curr = curr.opponent();
+		// 	this.setLevel(getLevel() + 1);
+		// }
+
+		// while (!s.isEmpty()) {
+		// 	GameTree poppedTree = (GameTree) s.top();
+		// 	//poppedTree.buildGameDF(s, curr, d);
+		// 	System.out.println("Not empty!");
+		// 	s.pop();
+		// }
 
 		//System.out.println("\n\n\n\nGame tree: " + toString()+"\n\n\n\nend of tree");
 
