@@ -448,12 +448,14 @@ public class GameTree implements GameTreeInterface
                 TNode newTNode = new TNode(newGrid, getLevel() + 1);
                 if (this.root.getChild() == null) {
                     this.root.setChild(newTNode);
+					System.out.println("Set child: " + newTNode.getData().toString());
                 } else {
                     TNode sibling = this.root.getChild();
                     while (sibling.getSibling() != null) {
                     sibling = sibling.getSibling();
                     }
                     sibling.setSibling(newTNode);
+					System.out.println("Set sibling: " + newTNode.getData().toString());
                 }
 				GameTree newTree = new GameTree(newTNode, getLevel() + 1);
                 Node newNode = new Node(newTree);
@@ -525,7 +527,7 @@ public class GameTree implements GameTreeInterface
 			curr = curr.opponent();
 		}
 
-		System.out.println("\n\n\n\nGame tree: " + toString()+"\n\n\n\nend of tree");
+		//System.out.println("\n\n\n\nGame tree: " + toString()+"\n\n\n\nend of tree");
 
 		trace("buildGameDF: buildGameDF ends");
 	}
