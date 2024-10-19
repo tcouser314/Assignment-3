@@ -573,6 +573,7 @@ public void generateLevelDF(Stack s, Player curr, int maxDepth) {
 		// // System.out.println("Data type of root: "+this.root.getData().getClass().getName());
 
 		generateLevelDF(s, curr.opponent(), d);
+		System.out.println("Tree: "+this.toString());
 
 		// while (getLevel() < d) {
 		// 	generateLevelDF(s, curr.opponent());
@@ -1069,7 +1070,6 @@ public void generateLevelDF(Stack s, Player curr, int maxDepth) {
 		String s="";
 
 		trace("rootNodeToString: rootNodeToString starts");
-		System.out.println("\n\nGameTree: ");
 
 		if (isEmpty())
 		{
