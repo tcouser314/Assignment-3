@@ -239,6 +239,10 @@ public class TicTacToe extends Frame implements TicTacToeInterface, ActionListen
 						// find user's move and then generate computer's alternatives
 						trace("paint: game isn't over");
 				        window.getGraphics().drawString("I'm thinking...",10,695);
+						// Location l1 = new Location(1, 1);
+						// Location l2 = new Location(1, 2);
+						// board.occupySquare(l1, HUMAN.getSymbol());
+						// board.occupySquare(l2, COMPUTER.getSymbol());
 						game.findMove();
 						if (game.isEmpty())
 						{
