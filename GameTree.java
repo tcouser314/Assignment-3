@@ -424,73 +424,10 @@ public class GameTree implements GameTreeInterface
 	 *
 	 *
 	*/
-	// public void generateLevelDF(Stack s,Player curr)
-	// {
-	// 	assert ((s!=null) && (curr!=null));
+public void generateLevelDF(Stack s, Player curr) {
+    assert ((s != null) && (curr != null));
 
-	// 	trace("generateLevelDF: generateLevelDF starts");
-
-	// 	TNode rootTNode = this.root;
-	// 	Grid rootGrid = (Grid) rootTNode.getData();
-	// 	//System.out.println("root: "+rootGrid.toString());
-	// 	Symbol empty = new Symbol();
-
-	// 	int dimension = rootGrid.getDimension();
-	// 	if (!rootGrid.gameOver()) {
-	// 	for (int i = 1; i <= dimension; i++) {
-	// 		for (int j = 1; j <= dimension; j++) {
-	// 			Location newLocation = new Location(i, j);
-	// 			if (rootGrid.getSymbol(newLocation).equals(empty)) {
-	// 				Grid newGrid = (Grid) rootGrid.clone();
-	// 				newGrid.occupySquare(newLocation, curr.getSymbol());
-	// 				newGrid.setWorth(newGrid.evaluateGrid(curr.opponent()));
-	// 				GameTree newTree = new GameTree(newGrid, this.getLevel() + 1); // new tree to be added at the lowest level
-
-	// 				if (this.getChild().isEmpty()) {
-	// 					this.setChild(newTree);
-	// 					System.out.println("Set child");
-	// 				}
-	// 				else {
-	// 					GameTree childTree = this.getChild();
-	// 					while (childTree.getLevel() <= this.getLevel()) { // go to current level
-	// 						System.out.println("Moved down a level");
-	// 						childTree = childTree.getChild();
-	// 					}
-	// 					GameTree siblingTree = childTree;
-	// 					if (siblingTree.getSibling().isEmpty()) {
-	// 						siblingTree.setSibling(newTree);
-	// 						System.out.println("Set sibling");
-	// 					}
-	// 					else {
-	// 					while (!siblingTree.getSibling().isEmpty()) { // find the last sibling
-	// 						System.out.println("Moved to sibling");
-	// 						siblingTree = siblingTree.getSibling();
-	// 					}
-	// 					siblingTree.setSibling(newTree);
-	// 					System.out.println("Set sibling");
-	// 				}
-	// 				s.push(this);
-	// 				System.out.println("Pushed onto stack");
-	// 			}
-	// 		}
-	// 		}
-
-	// 	}
-	// }
-	// setLevel(getLevel() + 1);
-	// 	//System.out.println("Final tree: "+this.toString());
-	// trace("generateLevelDF: generateLevelDF ends");
-	// }
-
-public void generateLevelDF(Stack s, Player curr, int maxDepth) {
-    assert ((s != null) && (curr != null) && (maxDepth > 0));
-
-    trace("generateLevelToDepth: starts");
-
-    // Check if we have reached the maximum depth
-    if (this.getLevel() >= maxDepth) {
-        return; // Stop recursion if the max depth is reached
-    }
+    trace("generateLevelDF: starts");
 
     TNode rootTNode = this.root;
     Grid rootGrid = (Grid) rootTNode.getData();
@@ -506,10 +443,8 @@ public void generateLevelDF(Stack s, Player curr, int maxDepth) {
                     newGrid.occupySquare(newLocation, curr.getSymbol());
                     newGrid.setWorth(newGrid.evaluateGrid(curr.opponent()));
 
-                    // Create a new tree node for this move
                     GameTree newTree = new GameTree(newGrid, this.getLevel() + 1);
 
-                    // Add as child or sibling as appropriate
                     if (this.getChild().isEmpty()) {
                         this.setChild(newTree);
                     } else {
@@ -519,18 +454,14 @@ public void generateLevelDF(Stack s, Player curr, int maxDepth) {
                         }
                         childTree.setSibling(newTree);
                     }
-
-                    // Add the new tree to the stack (optional)
+                    // Push the new tree onto the stack
                     s.push(newTree);
-
-                    // Recursively generate the next level of the game tree
-                    newTree.generateLevelDF(s, curr.opponent(), maxDepth);
                 }
             }
         }
     }
 
-    trace("generateLevelToDepth: ends");
+    trace("generateLevelDF: ends");
 }
 
 
@@ -561,38 +492,27 @@ public void generateLevelDF(Stack s, Player curr, int maxDepth) {
 	 *
 	 *
 	*/
-	public void buildGameDF(Stack s, Player curr, int d)
-	{
-		GameTree t;
-		Node n;
+public void buildGameDF(Stack s, Player curr, int d) {
+    assert ((!isEmpty()) && (s != null) && (curr != null) && (d > 0));
 
-		assert ((!isEmpty()) && (s!=null) && (curr!=null) && (d>0));
+    trace("buildGameDF: starts");
 
-		trace("buildGameDF: buildGameDF starts");
+    // Use the stack to expand the game tree to the desired depth
+    s.push(this); // Start by pushing the root tree onto the stack
 
-		// // System.out.println("Data type of root: "+this.root.getData().getClass().getName());
+    while (!s.isEmpty()) {
+        GameTree t = (GameTree) s.top();
+		s.pop();
+        if (t.getLevel() < d) {
+            t.generateLevelDF(s, curr.opponent());
+			curr = curr.opponent();
+        }
+    }
+	System.out.println("Tree: "+this.toString());
 
-		generateLevelDF(s, curr.opponent(), d);
-		System.out.println("Tree: "+this.toString());
+    trace("buildGameDF: ends");
+}
 
-		// while (getLevel() < d) {
-		// 	generateLevelDF(s, curr.opponent());
-		// 	System.out.println("Generated level");
-		// 	curr = curr.opponent();
-		// }
-
-		//System.out.println("Game tree: " + toString());
-
-		// while (!s.isEmpty()) {
-		// 	GameTree poppedTree = (GameTree) s.top();
-		// 	//poppedTree.buildGameDF(s, curr, d);
-		// 	s.pop();
-		// }
-
-		//System.out.println("\n\n\n\nGame tree: " + toString()+"\n\n\n\nend of tree");
-
-		trace("buildGameDF: buildGameDF ends");
-	}
 
 
 	/**

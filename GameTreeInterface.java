@@ -33,7 +33,7 @@ public interface GameTreeInterface
 	public GameTree getChild() throws EmptyGameTreeException;
 	public void setSibling(GameTree s) throws EmptyGameTreeException;
 	public GameTree getSibling() throws EmptyGameTreeException;
-	public void generateLevelDF(Stack s,Player p, int d);
+	public void generateLevelDF(Stack s,Player p);
 	public void generateLevelBF(Queue q,Player p);
 	public void buildGameDF(Stack s,Player p,int l);
 	public void buildGameBF(Queue q,Player p,int l);
