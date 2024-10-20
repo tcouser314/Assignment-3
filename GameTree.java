@@ -440,8 +440,15 @@ public void generateLevelDF(Stack s, Player curr) {
                 Location newLocation = new Location(i, j);
                 if (rootGrid.getSymbol(newLocation).equals(empty)) {
                     Grid newGrid = (Grid) rootGrid.clone();
-                    newGrid.occupySquare(newLocation, curr.getSymbol());
-                    newGrid.setWorth(newGrid.evaluateGrid(curr.opponent()));
+					if (getLevel() % 2 == 0) {
+						newGrid.occupySquare(newLocation, curr.getSymbol());
+						newGrid.setWorth(newGrid.evaluateGrid(curr.opponent()));
+					} else {
+						newGrid.occupySquare(newLocation, curr.opponent().getSymbol());
+						newGrid.setWorth(newGrid.evaluateGrid(curr));
+					}
+                    //newGrid.occupySquare(newLocation, curr.getSymbol());
+
 
                     GameTree newTree = new GameTree(newGrid, this.getLevel() + 1);
 
@@ -505,7 +512,7 @@ public void buildGameDF(Stack s, Player curr, int d) {
 		s.pop();
         if (t.getLevel() < d) {
             t.generateLevelDF(s, curr.opponent());
-			curr = curr.opponent();
+			//curr = curr.opponent();
         }
     }
 	System.out.println("Tree: "+this.toString());
